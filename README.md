@@ -1,64 +1,37 @@
-# FLEMMS Digital Divide & Functional Literacy Data Pipeline
-
-## Project Overview
-This project builds a robust Data Engineering ETL pipeline using the Functional Literacy, Education, and Mass Media Survey (FLEMMS) dataset (focusing on the 2024 study covering 172,800 houses). 
-
-### Problem Statement
-Is there a digital divide between different age groups, geographic regions, and educational levels in the Philippines, and to what extent does this digital divide relate to the functional literacy of the population?
-
-## Project Architecture & Directory Structure
-- `data/raw/`: Original multi-year metadata and zipped survey folders.
-- `data/processed/`: Partitioned and cleaned data separated into `households/` and `individuals/`.
-- `data/final/`: Final analysis-ready analytical base tables (ABT).
-- `notebooks/`: Jupyter notebooks used for exploratory data analysis and ETL prototyping.
-- `src/`: Modular Python scripts for extraction, transformation, and loading.
-
-## Current Progress (Data Engineering Phase)
-1. **Ingestion & Partitioning:** Successfully extracted multi-year raw CSV files, handling encoding (`latin-1`) and memory constraints by partitioning data into household and individual directories.
-2. **Data Profiling & Cleaning:** Standardized column schemas to `lower_snake_case`, handled tokenizing errors, eliminated duplicates, and filtered down to the target 2024 baseline datasets.
-
-## Folder Structure
-flemms_digital_divide_project/
-│
-├── data/
-│   ├── raw/          # Untouched raw survey files & metadata
-│   ├── processed/    # Partitioned household and individual CSVs
-│   └── final/        # Clean analytical base tables (.parquet)
-│
-├── notebooks/        # Jupyter notebooks for EDA and ETL prototyping
-├── sql/              # Database schemas and analytical queries
-├── src/              # Modular Python scripts (extract, transform, load)
-├── pipeline.py       # Main pipeline orchestrator
-└── requirements.txt  # Project dependencies
-
 # FLEMMS 2024 Digital Divide & Functional Literacy Project
 
 ## Project Overview
-This Data Engineering project analyzes the **2024 Functional Literacy, Education, and Mass Media Survey (FLEMMS)** dataset from the Philippine Statistics Authority (PSA). The survey covers 172,800 households. The core objective is to investigate whether a digital divide exists across different age groups, geographic regions, and educational levels in the Philippines, and how it correlates with functional literacy.
+This Data Engineering and Analytics project analyzes the **2024 Functional Literacy, Education, and Mass Media Survey (FLEMMS)** dataset from the Philippine Statistics Authority (PSA), covering 172,800 households. 
 
-## System Architecture
-The ETL (Extract, Transform, Load) pipeline is built using Python (Pandas) and orchestrated to handle multi-gigabyte survey datasets efficiently.
+**Problem Statement:** Is there a digital divide between different age groups, geographic regions, and educational levels in the Philippines, and to what extent does this digital divide relate to the functional literacy of the population?
 
-- **Data Ingestion (`src/extract.py`):** Automated extraction and parsing of raw PUF (Public Use File) datasets, handling legacy encoding (`latin-1`) and tokenization errors.
-- **Data Harmonization (`src/transform.py`):** Standardizing column headers to `lower_snake_case`, merging household data (digital access metrics) with individual demographic data (age, education, literacy) using geographic and household keys.
-- **Optimized Storage (`src/load.py`):** The final Analytical Base Table is exported as a compressed Apache Parquet file (`flemms_analytical_base_table.parquet`), significantly reducing read times for Data Science modeling.
+## Project Status: ETL Pipeline & Analytical Base Table Established
+We have successfully established a robust ETL (Extract, Transform, Load) pipeline, culminating in a ready-for-analysis Analytical Base Table (ABT). Due to the massive size of the raw data (surpassing GitHub's 100MB limit), the pipeline is designed to run locally or in cloud environments (like Google Colab) while keeping version control strictly to the source code.
+
+### Key Accomplishments
+1. **Data Ingestion & Partitioning:** Successfully extracted multi-year raw CSV files, handled legacy encoding (`latin-1`), and partitioned massive datasets into `/households` and `/individuals` directories to optimize memory.
+2. **Data Cleaning & Schema Harmonization:** Automated the standardization of column schemas to `lower_snake_case`, handled tokenization errors, eliminated exact duplicates, and dropped fully empty columns.
+3. **Modular ETL Architecture:** Built reusable Python scripts (`src/extract.py`, `src/transform.py`, `src/load.py`) to systematically merge household digital access data with individual demographic data using geographic and household keys.
+4. **Optimized Final Storage:** Exported the merged data as a compressed Apache Parquet file (`flemms_analytical_base_table.parquet`), significantly reducing read times and preparing the data for the Data Scientist.
+5. **Feature Engineering & Visualization Framework:** Laid the groundwork for calculating a `digital_access_score` and `literacy_tier`, along with basic Matplotlib/Seaborn visualization scripts for exploratory stakeholder reporting.
 
 ## Folder Structure
 ```text
 flemms_digital_divide_project/
 │
 ├── data/
-│   ├── raw/          # Untouched raw survey files (Ignored in Git)
+│   ├── raw/          # Untouched raw survey files & metadata (Ignored in Git)
 │   ├── processed/    # Partitioned household and individual CSVs (Ignored)
 │   └── final/        # Clean Parquet analytical base tables (Ignored)
 │
 ├── notebooks/        # Jupyter notebooks for EDA and ETL prototyping
 ├── sql/              # schema.sql documenting final table architecture
 ├── src/              # Modular ETL Python scripts
+│   ├── __init__.py
 │   ├── extract.py
 │   ├── transform.py
 │   └── load.py
 │
-├── pipeline.py       # Main orchestrator script to run the ETL
-├── requirements.txt  # Project dependencies
-└── .gitignore        # Keeps large data files out of version control
+├── pipeline.py       # Main pipeline orchestrator
+├── requirements.txt  # Project dependencies (pandas, pyarrow, etc.)
+└── .gitignore        # Blocks large data files from exceeding GitHub size limits
