@@ -1,0 +1,30 @@
+# Ignore all data directories
+data/
+data/raw/
+data/processed/
+data/final/
+
+# Ignore large data extensions
+*.csv
+*.csdb
+*.xlsx
+*.parquet
+
+# Ignore environments and cache
+.venv/
+venv/
+__pycache__/
+.DS_Store
+
+# Ignore data folders (we only track code, not large datasets)
+data/raw/
+data/processed/
+data/final/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+.venv/
+venv/
