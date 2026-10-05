@@ -2,20 +2,22 @@
 
 ## Sources
 
-| | Source 1: FLEMMS 2024 Volume 1 | Source 2: FLEMMS 2024 Volume 2 (planned) | Source 3: PSGC regions API |
-|---|---|---|---|
-| **Provider** | Philippine Statistics Authority (PSA) | Philippine Statistics Authority (PSA) | PSGC API (open project publishing PSA's Philippine Standard Geographic Code as JSON) |
-| **Location** | PSA microdata catalog, <https://psada.psa.gov.ph/catalog/FLEMMS>, study `PHL-PSA-FLEMMS-2024-V1-PUF` | PSA microdata catalog, FLEMMS 2024 Volume 2 | <https://psgc.gitlab.io/api/regions.json> |
-| **Content** | Household record, household questions (RTF1: assets, internet, ICT), member roster, literacy indicators (RTF2: Forms 2A/2B/2C) | Form 3: mass media exposure and digital skills, 10-64 years old | 17 regions: code, name, island group |
-| **Format** | 4 CSV files + data dictionary (XLSX) + CSPro dictionary (DCF) + user's guide (PDF) | CSV (expected) | JSON (REST) |
-| **Size** | 1,616,326 rows in total (see below), 184 MB | — | 17 records, 3 KB |
-| **Access date** | Files downloaded 26 September 2026 | Not yet obtained | Fetched automatically on every run (time stored in `data/raw/psgc/regions.meta.json`) |
-| **Retrieval** | Manual download (catalog login + terms of use), then automatic registration by `ingest_survey_files` | Planned: same as Volume 1 | Automatic: `fetch_region_codes` with 3 retries and a cached fallback |
-| **Update frequency** | FLEMMS is conducted every 3 years (PSA user's guide); 2024 is the 7th round | Same as Volume 1 | Changes when PSA updates the PSGC |
-| **Terms of use** | PSA public-use file terms, accepted when downloading. The microdata are **not** committed to this repository; each user downloads them under the same terms | PSA public-use file terms | Public, no authentication required |
-| **Known limitations** | Public-use file: no municipality/barangay, so analysis stops at province/region; digital access is measured per **household**, not per person; cross-sectional (association, not causation) | Not yet ingested; the pipeline runs without it | Does not yet include the Negros Island Region (code 18, created 2024) |
+| | Source 1: PSA FLEMMS 2024 public-use file | Source 2: PSGC regions API |
+|---|---|---|
+| **Provider** | Philippine Statistics Authority (PSA) | PSGC API (open project publishing PSA's Philippine Standard Geographic Code as JSON) |
+| **Location** | PSA microdata catalog, <https://psada.psa.gov.ph/catalog/FLEMMS>, study `PHL-PSA-FLEMMS-2024-V1-PUF` (see the note on volumes below) | <https://psgc.gitlab.io/api/regions.json> |
+| **Content** | Household record, household questions (RTF1: assets, internet, ICT), member roster, literacy indicators (RTF2: Forms 2A/2B/2C) | 17 regions: code, name, island group |
+| **Format** | 4 CSV files + data dictionary (XLSX) + CSPro dictionary (DCF) + user's guide (PDF) | JSON (REST) |
+| **Size** | 1,616,326 rows in total (see below), 184 MB | 17 records, 3 KB |
+| **Access date** | Files downloaded 26 September 2026 | Fetched automatically on every run (time stored in `data/raw/psgc/regions.meta.json`) |
+| **Retrieval** | Manual download (catalog login + terms of use), then automatic registration by `ingest_survey_files` | Automatic: `fetch_region_codes` with 3 retries and a cached fallback |
+| **Update frequency** | FLEMMS is conducted every 3 years (PSA user's guide); 2024 is the 7th round | Changes when PSA updates the PSGC |
+| **Terms of use** | PSA public-use file terms, accepted when downloading. The microdata are **not** committed to this repository; each user downloads them under the same terms | Public, no authentication required |
+| **Known limitations** | Public-use file: no municipality/barangay, so analysis stops at province/region; digital access is measured per **household**, not per person; cross-sectional (association, not causation) | Does not yet include the Negros Island Region (code 18, created 2024) |
 
-Why these sources: Volume 1 contains both sides of the research question (household digital access in RTF1, individual functional literacy in RTF2) for 177,656 households, with official survey weights. The PSGC API replaces a hand-typed region list that had wrong labels. Volume 2 would add individual-level internet use and digital skills.
+**About Volume 1 and Volume 2.** PSA's catalog lists the 2024 public-use file as Volume 1 and Volume 2. We downloaded both: they contain identical files (the same four CSVs, file names and sizes), so the pipeline ingests one copy. Ingesting both would duplicate every record, which the staging duplicate check (1% limit) would stop. The raw folder and file names keep PSA's original names (`PHL-PSA-FLEMMS-2024-V1-PUF`, `FLEMMS PUF 2024 Volume1 - …`) because the raw layer stores files exactly as received.
+
+Why these sources: the FLEMMS 2024 public-use file contains both sides of the research question (household digital access in RTF1, individual functional literacy in RTF2) for 177,656 households, with official survey weights. The PSGC API replaces a hand-typed region list that had wrong labels.
 
 ## Profiling summary (raw files, before cleaning)
 

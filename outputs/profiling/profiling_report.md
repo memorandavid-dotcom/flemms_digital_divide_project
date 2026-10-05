@@ -1,6 +1,6 @@
 # Source profiling report
 
-Generated 2026-10-05T05:55:58+00:00 (batch `manual__2026-10-05T05:54:36.567625+00:00`) from the raw files, before any cleaning.
+Generated 2026-10-05T09:14:14+00:00 (batch `manual__2026-10-05T09:13:06.913597+00:00`) from the raw files, before any cleaning.
 
 ## v1_household — `FLEMMS PUF 2024 Volume1 - HOUSEHOLD.CSV`
 

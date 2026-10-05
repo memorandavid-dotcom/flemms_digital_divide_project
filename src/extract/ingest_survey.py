@@ -1,4 +1,4 @@
-"""Sources 1 and 2: FLEMMS 2024 Volume 1 and Volume 2 public-use files (CSV).
+"""Source 1: PSA FLEMMS 2024 public-use file (CSV files + XLSX data dictionary).
 
 PSA's microdata catalog requires a login and acceptance of its terms of use,
 so a person downloads the files once and places them in data/raw/<folder>/.

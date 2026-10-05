@@ -30,7 +30,7 @@ The PSA publishes FLEMMS as raw, coded microdata spread over several files, with
 
 **Expected data product:** the curated tables `household`, `member`, `literacy_assessment`, `dim_region`, `agg_literacy_digital` (PostgreSQL + Parquet) and the person-level `person_profile` (Parquet, partitioned by region).
 
-**Scope:** FLEMMS 2024 Volume 1 (all four record types), PSGC regions. **Out of scope for now:** Volume 2 (Form 3, individual internet use and digital skills; the pipeline is ready to add it), earlier FLEMMS rounds, sub-provincial geography (not in the public-use file).
+**Scope:** FLEMMS 2024 public-use file (all four record types), PSGC regions. **Out of scope for now:** individual-level internet use and digital skills (FLEMMS Form 3), earlier FLEMMS rounds, sub-provincial geography (not in the public-use file).
 
 ## 2. Team
 
@@ -70,9 +70,10 @@ These are associations from a cross-sectional survey, not proof that internet ac
 
 | # | Source | Format | How it is retrieved |
 |---|---|---|---|
-| 1 | PSA FLEMMS 2024 Volume 1 public-use file (household, RTF1, member, RTF2) + data dictionary | CSV + XLSX | Downloaded once from the PSA catalog (login and terms of use required), then registered automatically |
-| 2 | PSA FLEMMS 2024 Volume 2 (planned) | CSV | Same as above; not yet ingested |
-| 3 | PSGC regions API | JSON (REST) | Fetched automatically on every run, with retries and a cached fallback |
+| 1 | PSA FLEMMS 2024 public-use file (household, RTF1, member, RTF2) + data dictionary | CSV + XLSX | Downloaded once from the PSA catalog (login and terms of use required), then registered automatically |
+| 2 | PSGC regions API | JSON (REST) | Fetched automatically on every run, with retries and a cached fallback |
+
+PSA's catalog lists the 2024 public-use file as Volume 1 and Volume 2. We downloaded both: they contain identical files (the same four CSVs, file names and sizes), so the pipeline ingests one copy. Ingesting both would duplicate every record, which the staging duplicate check (1% limit) would stop. The raw folder and file names keep PSA's original names (`PHL-PSA-FLEMMS-2024-V1-PUF`, `FLEMMS PUF 2024 Volume1 - …`) because the raw layer stores files exactly as received.
 
 1,616,326 survey records in total. Full inventory, profiling and data-quality issues: [docs/source_inventory.md](docs/source_inventory.md).
 
@@ -278,7 +279,7 @@ Rules live in [docs/data_contract.yaml](docs/data_contract.yaml); `src/validatio
 
 PostgreSQL enforces the same keys and ranges again with `PRIMARY KEY`, `FOREIGN KEY` and `CHECK` constraints.
 
-**Duplicates:** staging removes fully repeated rows and repeated keys, saves any removed rows to `data/staging/_rejects/` and writes counts to `outputs/staging/dedup_report.json`. It stops if more than 1% of a file is duplicated (usually a wrong key or a broken download). The 2024 Volume 1 files contain **no** duplicates; the checks still run every time.
+**Duplicates:** staging removes fully repeated rows and repeated keys, saves any removed rows to `data/staging/_rejects/` and writes counts to `outputs/staging/dedup_report.json`. It stops if more than 1% of a file is duplicated (usually a wrong key or a broken download). The FLEMMS 2024 files contain **no** duplicates; the checks still run every time.
 
 ## 10. Rerun safety (idempotency)
 
@@ -326,7 +327,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 ## 13. Assumptions and limitations
 
 - The survey files must be downloaded by hand once (PSA login and terms of use).
-- Digital access in Volume 1 is measured per **household**, so every member of a household gets the same access tier. Volume 2 (Form 3) would allow individual-level digital measures.
+- Digital access in the FLEMMS 2024 public-use file is measured per **household**, so every member of a household gets the same access tier. Individual-level data (FLEMMS Form 3) would allow individual digital measures.
 - The digital access score and tiers are our own business rule (documented in `config/pipeline.yaml` and `docs/data_flow.md`), not a PSA indicator.
 - Public-use files stop at province level; regional estimates follow the survey design, smaller areas are not reliable.
 - Rates in `agg_literacy_digital` cells with few sampled persons are unstable.
@@ -348,7 +349,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 
 ## 15. Future improvements
 
-- Ingest Volume 2 (Form 3) for individual internet use and digital skills.
+- Add individual-level internet use and digital skills (FLEMMS Form 3) if PSA releases them.
 - Add earlier FLEMMS rounds (2019) to compare trends; the `survey_year` keys already allow it.
 - Include the Negros Island Region once the PSGC API publishes it.
 - Report standard errors / confidence intervals using the PSU design variables.

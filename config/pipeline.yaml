@@ -9,7 +9,8 @@ paths:
   outputs: outputs       # validation reports, profiling, format benchmark
 
 sources:
-  # Source 1 - PSA microdata catalog (manual download: login + terms of use)
+  # Source 1 - PSA microdata catalog (manual download: login + terms of use).
+  # PSA lists this file as Volume 1 and Volume 2; both downloads are identical, so it is ingested once.
   flemms_2024_v1:
     type: survey_files
     title: Functional Literacy, Education and Mass Media Survey 2024 Volume 1
@@ -31,16 +32,8 @@ sources:
         file_pattern: "*volume1*rtf2*.csv"
         key: [hhid, lno_f2]
 
-  # Source 2 - PSA microdata catalog (Form 3: mass media and digital skills).
-  # Optional: the pipeline runs without it until its files are added.
-  flemms_2024_v2:
-    type: survey_files
-    title: Functional Literacy, Education and Mass Media Survey 2024 Volume 2
-    provider: Philippine Statistics Authority (PSA)
-    folder: PHL-PSA-FLEMMS-2024-V2-PUF
-    tables: {}
 
-  # Source 3 - REST API, retrieved automatically on every run
+  # Source 2 - REST API, retrieved automatically on every run
   psgc_regions:
     type: api
     title: Philippine Standard Geographic Code - regions

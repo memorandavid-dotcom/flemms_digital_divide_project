@@ -20,7 +20,7 @@ dataset: flemms_2024_digital_divide
 owner: FLEMMS project team (DSS150P)
 producer:
   sources:
-    - PSA FLEMMS 2024 Public-Use File, Volume 1 (CSV + data dictionary XLSX)
+    - PSA FLEMMS 2024 public-use file (CSV + data dictionary XLSX)
     - PSGC regions API (JSON)
   pipeline: Airflow DAG flemms_digital_divide_pipeline
 consumers:
