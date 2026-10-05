@@ -1,0 +1,40 @@
+{
+  "batch_id": "manual__2026-10-05T05:54:36.567625+00:00",
+  "run_at": "2026-10-05T05:59:26+00:00",
+  "table": "person_profile",
+  "rows": 650424,
+  "columns": 29,
+  "formats": [
+    {
+      "format": "CSV",
+      "size_mb": 146.52,
+      "write_s": 20.88,
+      "read_s": 4.52,
+      "types_preserved": "no (27 of 29 columns changed type)"
+    },
+    {
+      "format": "JSON (records, one per line)",
+      "size_mb": 485.02,
+      "write_s": 12.95,
+      "read_s": 18.76,
+      "types_preserved": "no (27 of 29 columns changed type)"
+    },
+    {
+      "format": "Parquet (snappy)",
+      "size_mb": 9.16,
+      "write_s": 1.86,
+      "read_s": 0.25,
+      "types_preserved": "yes"
+    }
+  ],
+  "partition_pruning": {
+    "partition_column": "region_code",
+    "region_code": 13,
+    "rows_all": 650424,
+    "seconds_all": 0.118,
+    "files_all": 17,
+    "rows_one_region": 80320,
+    "seconds_one_region": 0.017,
+    "files_one_region": 1
+  }
+}

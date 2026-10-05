@@ -1,0 +1,700 @@
+{
+  "table": "v1_member",
+  "file": "FLEMMS PUF 2024 Volume1 - MEMBER.CSV",
+  "rows": 650424,
+  "columns": 45,
+  "exact_duplicate_rows": 0,
+  "column_profiles": {
+    "REG": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 17,
+      "top_values": {
+        "13": 80320,
+        "03": 52553,
+        "19": 47641,
+        "06": 42534,
+        "08": 41275
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 9.668
+    },
+    "REG2": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 18,
+      "top_values": {
+        "13": 80320,
+        "03": 52553,
+        "19": 47641,
+        "08": 41275,
+        "10": 39176
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 10.025
+    },
+    "PRV": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 118,
+      "top_values": {
+        "087": 10570,
+        "036": 9336,
+        "007": 7198,
+        "809": 6850,
+        "070": 6808
+      },
+      "min": 1.0,
+      "max": 999.0,
+      "mean": 182.287
+    },
+    "HHID": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 177656,
+      "top_values": {
+        "020465": 23,
+        "033605": 21,
+        "106289": 21,
+        "094847": 19,
+        "154697": 19
+      },
+      "min": 1.0,
+      "max": 177656.0,
+      "mean": 88911.049
+    },
+    "URBANITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 3,
+      "top_values": {
+        "2": 332198,
+        "1": 318044,
+        "3": 182
+      },
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.511
+    },
+    "PSU_MEM": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2126,
+      "top_values": {
+        "  101": 1911,
+        "   50": 1665,
+        "   18": 1619,
+        "   21": 1619,
+        "   94": 1595
+      },
+      "min": 1.0,
+      "max": 5236.0,
+      "mean": 568.135
+    },
+    "LNO": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 23,
+      "top_values": {
+        "01": 177656,
+        "02": 156138,
+        "03": 124777,
+        "04": 87909,
+        "05": 51586
+      },
+      "min": 1.0,
+      "max": 23.0,
+      "mean": 2.826
+    },
+    "SEX": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "1": 326962,
+        "2": 323462
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.497
+    },
+    "AGE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 100,
+      "top_values": {
+        "14": 13983,
+        "13": 13742,
+        "12": 13736,
+        "09": 13649,
+        "15": 13633
+      },
+      "min": 0.0,
+      "max": 99.0,
+      "mean": 31.997
+    },
+    "REL": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 26,
+      "top_values": {
+        "01": 177655,
+        "03": 139312,
+        "04": 123237,
+        "02": 113133,
+        "09": 23074
+      },
+      "min": 1.0,
+      "max": 26.0,
+      "mean": 3.895
+    },
+    "MOTHER": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 5,
+      "top_values": {
+        " 1": 277854,
+        "96": 221107,
+        "97": 148180,
+        "98": 3273,
+        "99": 10
+      },
+      "min": 1.0,
+      "max": 99.0,
+      "mean": 55.655
+    },
+    "MOTHER_LNO": {
+      "inferred_type": "numeric",
+      "missing": 372570,
+      "missing_pct": 57.28,
+      "distinct": 18,
+      "top_values": {
+        " 2": 193810,
+        " 1": 58411,
+        " 3": 10193,
+        " 4": 6250,
+        " 5": 3973
+      },
+      "min": 1.0,
+      "max": 20.0,
+      "mean": 2.012
+    },
+    "FATHER": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 5,
+      "top_values": {
+        " 1": 238235,
+        "96": 208529,
+        "97": 198073,
+        "98": 5528,
+        "99": 59
+      },
+      "min": 1.0,
+      "max": 99.0,
+      "mean": 61.526
+    },
+    "FATHER_LNO": {
+      "inferred_type": "numeric",
+      "missing": 412189,
+      "missing_pct": 63.37,
+      "distinct": 17,
+      "top_values": {
+        " 1": 200539,
+        " 2": 22639,
+        " 3": 6155,
+        " 4": 3665,
+        " 5": 2155
+      },
+      "min": 1.0,
+      "max": 17.0,
+      "mean": 1.31
+    },
+    "ETHNICITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 274,
+      "top_values": {
+        "253": 127196,
+        " 54": 112955,
+        "105": 55323,
+        " 76": 41490,
+        "106": 41059
+      },
+      "min": 1.0,
+      "max": 998.0,
+      "mean": 152.243
+    },
+    "MSTAT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 8,
+      "top_values": {
+        "1": 332358,
+        "2": 208536,
+        "3": 61756,
+        "4": 34149,
+        "6": 12981
+      },
+      "min": 1.0,
+      "max": 8.0,
+      "mean": 1.773
+    },
+    "OF": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 5,
+      "top_values": {
+        "5": 642648,
+        "1": 7124,
+        "2": 324,
+        "4": 282,
+        "3": 46
+      },
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 4.954
+    },
+    "OF_PRESENT": {
+      "inferred_type": "numeric",
+      "missing": 642648,
+      "missing_pct": 98.8,
+      "distinct": 2,
+      "top_values": {
+        "2": 6800,
+        "1": 976
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.874
+    },
+    "ATTEND_SCHOOL": {
+      "inferred_type": "numeric",
+      "missing": 333372,
+      "missing_pct": 51.25,
+      "distinct": 4,
+      "top_values": {
+        "1": 188635,
+        "4": 107353,
+        "2": 20951,
+        "3": 113
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 2.083
+    },
+    "ATTEND_GRADE_LEVEL": {
+      "inferred_type": "numeric",
+      "missing": 440725,
+      "missing_pct": 67.76,
+      "distinct": 9,
+      "top_values": {
+        "1": 82536,
+        "2": 52425,
+        "6": 31502,
+        "3": 22605,
+        "0": 19355
+      },
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 2.146
+    },
+    "ATTEND_GRADE": {
+      "inferred_type": "numeric",
+      "missing": 440725,
+      "missing_pct": 67.76,
+      "distinct": 41,
+      "top_values": {
+        "10016": 16837,
+        "24014": 15973,
+        "10014": 13734,
+        "10013": 13707,
+        "24012": 13091
+      },
+      "min": 1000.0,
+      "max": 80010.0,
+      "mean": 23075.7
+    },
+    "MODETRVL1": {
+      "inferred_type": "numeric",
+      "missing": 440725,
+      "missing_pct": 67.76,
+      "distinct": 10,
+      "top_values": {
+        " 1": 88956,
+        " 5": 38051,
+        " 3": 38035,
+        " 2": 25011,
+        " 8": 16961
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 2.858
+    },
+    "MODETRVL2": {
+      "inferred_type": "numeric",
+      "missing": 554476,
+      "missing_pct": 85.25,
+      "distinct": 9,
+      "top_values": {
+        " 3": 35419,
+        " 5": 25691,
+        " 8": 19340,
+        " 1": 12390,
+        " 6": 1413
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 4.403
+    },
+    "MODETRVL3": {
+      "inferred_type": "numeric",
+      "missing": 608724,
+      "missing_pct": 93.59,
+      "distinct": 9,
+      "top_values": {
+        " 8": 18270,
+        " 5": 9667,
+        " 1": 5403,
+        " 3": 5381,
+        " 6": 1855
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 5.613
+    },
+    "NATT_REASON": {
+      "inferred_type": "numeric",
+      "missing": 543071,
+      "missing_pct": 83.49,
+      "distinct": 20,
+      "top_values": {
+        " 8": 35286,
+        " 7": 15106,
+        " 3": 13903,
+        "11": 12417,
+        "14": 11680
+      },
+      "min": 1.0,
+      "max": 96.0,
+      "mean": 8.461
+    },
+    "BASIC_LIT": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 2,
+      "top_values": {
+        "1": 570740,
+        "2": 33051
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.055
+    },
+    "BASIC_NUM": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 2,
+      "top_values": {
+        "1": 575512,
+        "2": 28279
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.047
+    },
+    "HGC_LEVEL": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 9,
+      "top_values": {
+        "2": 194232,
+        "1": 179892,
+        "6": 131962,
+        "3": 40613,
+        "0": 37349
+      },
+      "min": 0.0,
+      "max": 8.0,
+      "mean": 2.615
+    },
+    "HGC_GRADE": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 609,
+      "top_values": {
+        "24015": 88391,
+        "10018": 57836,
+        "24013": 35430,
+        "24012": 32417,
+        "10015": 32135
+      },
+      "min": 0.0,
+      "max": 89999.0,
+      "mean": 27902.54
+    },
+    "DAYCARE": {
+      "inferred_type": "numeric",
+      "missing": 70910,
+      "missing_pct": 10.9,
+      "distinct": 4,
+      "top_values": {
+        "4": 304157,
+        "1": 255259,
+        "2": 19563,
+        "3": 535
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 2.61
+    },
+    "KINDER": {
+      "inferred_type": "numeric",
+      "missing": 83982,
+      "missing_pct": 12.91,
+      "distinct": 4,
+      "top_values": {
+        "1": 278792,
+        "4": 266702,
+        "2": 20539,
+        "3": 409
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 2.45
+    },
+    "SHS": {
+      "inferred_type": "numeric",
+      "missing": 498719,
+      "missing_pct": 76.68,
+      "distinct": 4,
+      "top_values": {
+        "4": 119591,
+        "1": 26012,
+        "2": 5931,
+        "3": 171
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 3.406
+    },
+    "SHS_TRACK": {
+      "inferred_type": "numeric",
+      "missing": 618310,
+      "missing_pct": 95.06,
+      "distinct": 4,
+      "top_values": {
+        "1": 27088,
+        "4": 4766,
+        "2": 203,
+        "3": 57
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.455
+    },
+    "ALS": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "3": 581131,
+        "1": 11378,
+        "4": 10612,
+        "2": 670
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 2.979
+    },
+    "WORK": {
+      "inferred_type": "numeric",
+      "missing": 173859,
+      "missing_pct": 26.73,
+      "distinct": 2,
+      "top_values": {
+        "1": 253395,
+        "2": 223170
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.468
+    },
+    "WORK_TYPE_MAJOR": {
+      "inferred_type": "numeric",
+      "missing": 397029,
+      "missing_pct": 61.04,
+      "distinct": 44,
+      "top_values": {
+        "61": 39836,
+        "52": 32803,
+        "93": 22458,
+        "83": 19728,
+        "92": 12773
+      },
+      "min": 1.0,
+      "max": 99.0,
+      "mean": 61.505
+    },
+    "WORK_CLASS": {
+      "inferred_type": "numeric",
+      "missing": 397029,
+      "missing_pct": 61.04,
+      "distinct": 7,
+      "top_values": {
+        "1": 99802,
+        "3": 79331,
+        "2": 29538,
+        "0": 25931,
+        "4": 10083
+      },
+      "min": 0.0,
+      "max": 6.0,
+      "mean": 1.926
+    },
+    "NOWORK_REASON": {
+      "inferred_type": "numeric",
+      "missing": 427254,
+      "missing_pct": 65.69,
+      "distinct": 10,
+      "top_values": {
+        " 1": 78339,
+        " 4": 73756,
+        " 8": 37414,
+        " 9": 12807,
+        " 6": 5752
+      },
+      "min": 1.0,
+      "max": 96.0,
+      "mean": 4.874
+    },
+    "DIFF_SEEING": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 555165,
+        "2": 41718,
+        "3": 5305,
+        "4": 1603
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.095
+    },
+    "DIFF_HEARING": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 582640,
+        "2": 16995,
+        "3": 2598,
+        "4": 1558
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.044
+    },
+    "DIFF_WALKING": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 580527,
+        "2": 16656,
+        "3": 4075,
+        "4": 2533
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.054
+    },
+    "DIFF_REMEMBERING": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 583858,
+        "2": 15420,
+        "3": 3013,
+        "4": 1500
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.043
+    },
+    "DIFF_SELFCARE": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 590313,
+        "2": 8620,
+        "3": 2444,
+        "4": 2414
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.034
+    },
+    "DIFF_COMMUNICATING": {
+      "inferred_type": "numeric",
+      "missing": 46633,
+      "missing_pct": 7.17,
+      "distinct": 4,
+      "top_values": {
+        "1": 592681,
+        "2": 6994,
+        "3": 2363,
+        "4": 1753
+      },
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 1.028
+    },
+    "MEM_RFACT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 4006,
+      "top_values": {
+        "    110.32158000": 737,
+        "    111.63506000": 696,
+        "     86.37026200": 664,
+        "     98.13011200": 616,
+        "    126.36870000": 575
+      },
+      "min": 3.1384616,
+      "max": 1453.8188,
+      "mean": 176.16
+    }
+  }
+}

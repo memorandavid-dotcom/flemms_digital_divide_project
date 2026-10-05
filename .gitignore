@@ -21,3 +21,7 @@ venv/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# --- Generated reports: keep only the latest copy of each in Git ---
+outputs/validation/*
+!outputs/validation/*_latest.json

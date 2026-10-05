@@ -1,0 +1,853 @@
+{
+  "table": "v1_household_questions",
+  "file": "FLEMMS PUF 2024 Volume1 - RTF1.CSV",
+  "rows": 177656,
+  "columns": 61,
+  "exact_duplicate_rows": 0,
+  "column_profiles": {
+    "REG": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 17,
+      "top_values": {
+        "13": 23217,
+        "03": 14269,
+        "19": 11946,
+        "06": 11682,
+        "08": 10940
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 9.647
+    },
+    "REG2": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 18,
+      "top_values": {
+        "13": 23217,
+        "03": 14269,
+        "19": 11946,
+        "08": 10940,
+        "10": 10616
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 10.008
+    },
+    "PRV": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 118,
+      "top_values": {
+        "087": 2832,
+        "036": 2230,
+        "809": 1978,
+        "010": 1801,
+        "035": 1792
+      },
+      "min": 1.0,
+      "max": 999.0,
+      "mean": 187.278
+    },
+    "HHID": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 177656,
+      "top_values": {
+        "000001": 1,
+        "000002": 1,
+        "000003": 1,
+        "000004": 1,
+        "000005": 1
+      },
+      "min": 1.0,
+      "max": 177656.0,
+      "mean": 88828.5
+    },
+    "URBANITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 3,
+      "top_values": {
+        "2": 89461,
+        "1": 88147,
+        "3": 48
+      },
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.504
+    },
+    "PSU_F1": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2126,
+      "top_values": {
+        "  101": 526,
+        "   18": 470,
+        "   50": 455,
+        "   21": 447,
+        "   27": 441
+      },
+      "min": 1.0,
+      "max": 5236.0,
+      "mean": 565.592
+    },
+    "BENEFICIARY_4PS": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 151373,
+        "1": 26283
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.852
+    },
+    "CHILDREN_04": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 144843,
+        "1": 32813
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.815
+    },
+    "ADULTS": {
+      "inferred_type": "numeric",
+      "missing": 144843,
+      "missing_pct": 81.53,
+      "distinct": 2,
+      "top_values": {
+        "1": 21506,
+        "2": 11307
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.345
+    },
+    "GUARDIAN": {
+      "inferred_type": "numeric",
+      "missing": 156150,
+      "missing_pct": 87.89,
+      "distinct": 6,
+      "top_values": {
+        "2": 13871,
+        "4": 5619,
+        "1": 1299,
+        "3": 503,
+        "5": 204
+      },
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 2.517
+    },
+    "CHILD_FACILITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 3,
+      "top_values": {
+        "2": 91001,
+        "1": 56454,
+        "3": 30201
+      },
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.852
+    },
+    "BUILDING": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 7,
+      "top_values": {
+        "1": 162343,
+        "3": 8019,
+        "2": 4725,
+        "5": 1648,
+        "4": 665
+      },
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 1.172
+    },
+    "ROOF": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 9,
+      "top_values": {
+        "1": 156322,
+        "3": 5686,
+        "2": 5662,
+        "5": 4809,
+        "4": 3571
+      },
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 1.313
+    },
+    "WALL": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 10,
+      "top_values": {
+        " 1": 101367,
+        " 5": 35738,
+        " 3": 25787,
+        " 2": 7068,
+        " 6": 5462
+      },
+      "min": 1.0,
+      "max": 99.0,
+      "mean": 2.592
+    },
+    "FLOOR_FINISH": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 8,
+      "top_values": {
+        "2": 78429,
+        "1": 51029,
+        "3": 24945,
+        "7": 10590,
+        "6": 9563
+      },
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 2.41
+    },
+    "FLOOR_MAIN": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 7,
+      "top_values": {
+        "1": 143680,
+        "3": 17306,
+        "2": 8798,
+        "5": 5893,
+        "4": 1835
+      },
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 1.412
+    },
+    "TENURE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 7,
+      "top_values": {
+        "1": 110055,
+        "3": 30948,
+        "5": 14109,
+        "6": 13165,
+        "2": 4742
+      },
+      "min": 1.0,
+      "max": 7.0,
+      "mean": 2.153
+    },
+    "ELECTRICITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "1": 169957,
+        "2": 7699
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.043
+    },
+    "HH_REF": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 92209,
+        "1": 85447
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.519
+    },
+    "HH_AIRCON": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 147339,
+        "1": 30317
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.829
+    },
+    "HH_WASHING": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 93239,
+        "1": 84417
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.525
+    },
+    "HH_OVEN": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 134258,
+        "1": 43398
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.756
+    },
+    "HH_RADIO": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 129494,
+        "1": 48162
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.729
+    },
+    "HH_ANATV": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 160011,
+        "1": 17645
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.901
+    },
+    "HH_DIGITV": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "1": 95754,
+        "2": 81902
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.461
+    },
+    "HH_AUDIO": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 142416,
+        "1": 35240
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.802
+    },
+    "HH_LANDLINE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 165411,
+        "1": 12245
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.931
+    },
+    "HH_BASICPHONE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 142439,
+        "1": 35217
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.802
+    },
+    "HH_SMARTPHONE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "1": 144618,
+        "2": 33038
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.186
+    },
+    "HH_TABLET": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 158486,
+        "1": 19170
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.892
+    },
+    "HH_PC": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 145067,
+        "1": 32589
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.817
+    },
+    "HH_CAR": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 161443,
+        "1": 16213
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.909
+    },
+    "HH_VAN": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 174604,
+        "1": 3052
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.983
+    },
+    "HH_JEEP": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 176237,
+        "1": 1419
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.992
+    },
+    "HH_TRUCK": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 175351,
+        "1": 2305
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.987
+    },
+    "HH_MOTOR": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 98112,
+        "1": 79544
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.552
+    },
+    "HH_EBIKE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 173742,
+        "1": 3914
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.978
+    },
+    "HH_TRICYCLE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 158250,
+        "1": 19406
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.891
+    },
+    "HH_BIKE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 162679,
+        "1": 14977
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.916
+    },
+    "HH_PEDICAB": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 175867,
+        "1": 1789
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.99
+    },
+    "HH_MBOAT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 172779,
+        "1": 4877
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.973
+    },
+    "HH_NBOAT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 174941,
+        "1": 2715
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.985
+    },
+    "HH_TRACTOR": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 176194,
+        "1": 1462
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.992
+    },
+    "HH_ANIMAL": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 168578,
+        "1": 9078
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.949
+    },
+    "HH_CABLE": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 134052,
+        "1": 43604
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.755
+    },
+    "HH_CABNET": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 139857,
+        "1": 37799
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.787
+    },
+    "HH_NOCABNET": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 159513,
+        "1": 18143
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.898
+    },
+    "HH_MOBSUB": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 96064,
+        "1": 81592
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.541
+    },
+    "HH_VSTREAM": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 139889,
+        "1": 37767
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.787
+    },
+    "HH_MSTREAM": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 130881,
+        "1": 46775
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.737
+    },
+    "DRINK_WATER": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 16,
+      "top_values": {
+        "72": 96331,
+        "11": 33741,
+        "21": 10920,
+        "41": 9530,
+        "12": 7330
+      },
+      "min": 11.0,
+      "max": 99.0,
+      "mean": 48.394
+    },
+    "OTHERS_WATER": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 16,
+      "top_values": {
+        "11": 98567,
+        "21": 22109,
+        "12": 14974,
+        "41": 9447,
+        "31": 8981
+      },
+      "min": 11.0,
+      "max": 99.0,
+      "mean": 17.404
+    },
+    "TOILET": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 13,
+      "top_values": {
+        "12": 126303,
+        "13": 21904,
+        "11": 16429,
+        "95": 3952,
+        "51": 2317
+      },
+      "min": 11.0,
+      "max": 95.0,
+      "mean": 15.114
+    },
+    "TOILET_LOC": {
+      "inferred_type": "numeric",
+      "missing": 4918,
+      "missing_pct": 2.77,
+      "distinct": 3,
+      "top_values": {
+        "1": 126084,
+        "2": 44130,
+        "3": 2524
+      },
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.285
+    },
+    "TOILET_SHARE": {
+      "inferred_type": "numeric",
+      "missing": 4918,
+      "missing_pct": 2.77,
+      "distinct": 2,
+      "top_values": {
+        "2": 146510,
+        "1": 26228
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.848
+    },
+    "TOILET_PUBLIC": {
+      "inferred_type": "numeric",
+      "missing": 151428,
+      "missing_pct": 85.24,
+      "distinct": 2,
+      "top_values": {
+        "1": 24644,
+        "2": 1584
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.06
+    },
+    "ODL_FAM": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 114910,
+        "1": 62746
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.647
+    },
+    "ICT_EQUIP": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2,
+      "top_values": {
+        "2": 116829,
+        "1": 60827
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.658
+    },
+    "ODL_SOFTWARE": {
+      "inferred_type": "numeric",
+      "missing": 116829,
+      "missing_pct": 65.76,
+      "distinct": 2,
+      "top_values": {
+        "1": 35362,
+        "2": 25465
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.419
+    },
+    "ODL_TECHNOLOGY": {
+      "inferred_type": "numeric",
+      "missing": 116829,
+      "missing_pct": 65.76,
+      "distinct": 2,
+      "top_values": {
+        "1": 52645,
+        "2": 8182
+      },
+      "min": 1.0,
+      "max": 2.0,
+      "mean": 1.135
+    },
+    "HH_RFACT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 10614,
+      "top_values": {
+        "    461.14124000": 194,
+        "     85.91584800": 97,
+        "     54.06955700": 95,
+        "    289.18167000": 92,
+        "    307.03040000": 88
+      },
+      "min": 5.2178888,
+      "max": 2137.7371,
+      "mean": 156.393
+    }
+  }
+}
