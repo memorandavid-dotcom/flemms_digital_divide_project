@@ -72,9 +72,12 @@ def ingest_survey_files(batch_id: str) -> dict:
     previous_file = manifest_dir / "latest.json"
     previous = read_json(previous_file) if previous_file.exists() else {"files": {}}
 
+    # Fail fast: make sure every expected file is present before the slow checksum work
+    paths = {item["table"]: locate(item) for item in survey_tables()}
+
     entries = {}
     for item in survey_tables():
-        path = locate(item)
+        path = paths[item["table"]]
         if path.stat().st_size == 0:
             raise ValueError(f"Source file is empty: {path}")
 
