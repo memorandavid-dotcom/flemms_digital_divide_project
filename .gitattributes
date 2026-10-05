@@ -1,0 +1,6 @@
+# Keep Unix line endings everywhere: Docker containers run Linux, and Windows
+# line endings break the shell commands inside docker-compose.yml.
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.parquet binary
