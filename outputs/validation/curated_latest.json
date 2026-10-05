@@ -1,0 +1,1603 @@
+{
+  "stage": "curated",
+  "batch_id": "manual__2026-10-05T05:54:36.567625+00:00",
+  "run_at": "2026-10-05T05:58:24+00:00",
+  "checks_run": 177,
+  "checks_failed": 0,
+  "warnings": 0,
+  "results": [
+    {
+      "table": "dim_region",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "17 rows (minimum 17)",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "required_columns",
+      "target": "region_code,region_name,region_short_name,island_group,psgc_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 5 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "dtype",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "not_null",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "range",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1, 19]",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "dtype",
+      "target": "region_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "not_null",
+      "target": "region_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "dtype",
+      "target": "region_short_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "not_null",
+      "target": "region_short_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "dtype",
+      "target": "island_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "not_null",
+      "target": "island_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "accepted_values",
+      "target": "island_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "dtype",
+      "target": "psgc_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "not_null",
+      "target": "psgc_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "unique",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "dim_region",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "177,656 rows (minimum 100,000)",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "required_columns",
+      "target": "survey_year,hhid,region_code,region_code_nir,province_code,psu,urbanity,is_4ps_beneficiary,has_electricity,owns_smartphone,owns_basic_phone,owns_computer,owns_tablet,has_internet_cable,has_internet_no_cable,has_home_internet,has_mobile_subscription,used_ict_for_learning,digital_access_score,digital_access_tier,household_weight,batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 22 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "accepted_values",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "region_code_nir",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "region_code_nir",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "province_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "province_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "psu",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "psu",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "urbanity",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "urbanity",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "accepted_values",
+      "target": "urbanity",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "is_4ps_beneficiary",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "is_4ps_beneficiary",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "has_electricity",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "has_electricity",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "owns_smartphone",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "owns_smartphone",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "owns_basic_phone",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "owns_basic_phone",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "owns_computer",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "owns_computer",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "owns_tablet",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "owns_tablet",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "has_internet_cable",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "has_internet_cable",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "has_internet_no_cable",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "has_internet_no_cable",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "has_home_internet",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "has_home_internet",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "has_mobile_subscription",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "has_mobile_subscription",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "used_ict_for_learning",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "used_ict_for_learning",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "digital_access_score",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "digital_access_score",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "range",
+      "target": "digital_access_score",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 5]",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "accepted_values",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "household_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found Float64",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "household_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "range",
+      "target": "household_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1e-06, None]",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "dtype",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "not_null",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "unique",
+      "target": "survey_year,hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "household",
+      "check": "foreign_key",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 key values not found in dim_region",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "650,424 rows (minimum 300,000)",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "required_columns",
+      "target": "survey_year,hhid,line_no,sex,age,age_group,education_level_code,education_level,attending_school,member_weight,batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 11 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "accepted_values",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "range",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1, None]",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "sex",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "sex",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "accepted_values",
+      "target": "sex",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "age",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "range",
+      "target": "age",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 98]",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "age_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "accepted_values",
+      "target": "age_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "education_level_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "range",
+      "target": "education_level_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 8]",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "education_level",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "attending_school",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "member_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found Float64",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "member_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "range",
+      "target": "member_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1e-06, None]",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "dtype",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "not_null",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "unique",
+      "target": "survey_year,hhid,line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "member",
+      "check": "foreign_key",
+      "target": "survey_year,hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 key values not found in household",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "610,590 rows (minimum 300,000)",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "required_columns",
+      "target": "survey_year,hhid,line_no,result_code,result,interview_completed,can_read,can_write,can_compute,can_comprehend,functional_literacy_level_code,functional_literacy_level,basic_literate,functional_literate,respondent_weight,batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 16 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "accepted_values",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "range",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1, None]",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "result_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "result_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "accepted_values",
+      "target": "result_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "result",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "result",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "interview_completed",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "interview_completed",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "can_read",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "can_write",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "can_compute",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "can_comprehend",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "functional_literacy_level_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "range",
+      "target": "functional_literacy_level_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 3]",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "functional_literacy_level",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "accepted_values",
+      "target": "functional_literacy_level",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "basic_literate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "functional_literate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected boolean, found boolean",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "respondent_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found Float64",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "respondent_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "range",
+      "target": "respondent_weight",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, None]",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "dtype",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "not_null",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "unique",
+      "target": "survey_year,hhid,line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "literacy_assessment",
+      "check": "foreign_key",
+      "target": "survey_year,hhid,line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 key values not found in member",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "408 rows (minimum 50)",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "required_columns",
+      "target": "survey_year,region_code,age_group,digital_access_tier,persons_sampled,weighted_population,functional_literacy_rate,basic_literacy_rate,batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 9 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "age_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "age_group",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "accepted_values",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside the allowed list",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "persons_sampled",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "persons_sampled",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "range",
+      "target": "persons_sampled",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [1, None]",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "weighted_population",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found float64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "weighted_population",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "range",
+      "target": "weighted_population",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, None]",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "functional_literacy_rate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found float64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "range",
+      "target": "functional_literacy_rate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 100]",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "basic_literacy_rate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected float, found float64",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "range",
+      "target": "basic_literacy_rate",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 values outside [0, 100]",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "dtype",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "not_null",
+      "target": "batch_id",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "unique",
+      "target": "survey_year,region_code,age_group,digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "agg_literacy_digital",
+      "check": "foreign_key",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 key values not found in dim_region",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "650,424 rows (minimum 300,000)",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "required_columns",
+      "target": "survey_year,region_code,region_name,hhid,line_no,digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 6 columns present",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found int64",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "survey_year",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "region_code",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "region_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found str",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "region_name",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "hhid",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected integer, found Int64",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "dtype",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "expected string, found string",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "not_null",
+      "target": "digital_access_tier",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 missing values",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "unique",
+      "target": "hhid,line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 rows share a key with another row",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "exact_duplicates",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 fully duplicated rows",
+      "severity": "error"
+    },
+    {
+      "table": "person_profile",
+      "check": "foreign_key",
+      "target": "survey_year,hhid,line_no",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "0 key values not found in member",
+      "severity": "error"
+    }
+  ]
+}

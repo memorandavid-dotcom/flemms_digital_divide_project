@@ -1,0 +1,89 @@
+# Pipeline settings that are not secrets. Passwords and hosts live in .env.
+survey_year: 2024
+
+# Folders, relative to the project root
+paths:
+  raw: data/raw          # source files exactly as downloaded / fetched
+  staging: data/staging  # cleaned, typed, de-duplicated copies (Parquet)
+  curated: data/curated  # integrated, analysis-ready tables (Parquet, partitioned)
+  outputs: outputs       # validation reports, profiling, format benchmark
+
+sources:
+  # Source 1 - PSA microdata catalog (manual download: login + terms of use)
+  flemms_2024_v1:
+    type: survey_files
+    title: Functional Literacy, Education and Mass Media Survey 2024 Volume 1
+    provider: Philippine Statistics Authority (PSA)
+    folder: PHL-PSA-FLEMMS-2024-V1-PUF
+    # PSA's data dictionary (variable labels + value labels), read automatically
+    codebook_pattern: "*dictionary*.xlsx"
+    tables:
+      v1_household:            # Form 1 household record: ids, PSU, weight
+        file_pattern: "*volume1*household*.csv"
+        key: [hhid]
+      v1_household_questions:  # RTF1: housing, assets, internet, ICT use
+        file_pattern: "*volume1*rtf1*.csv"
+        key: [hhid]
+      v1_member:               # Form 1 member roster: age, sex, education
+        file_pattern: "*volume1*member*.csv"
+        key: [hhid, lno]
+      v1_literacy:             # RTF2: literacy indicators from Forms 2A/2B/2C
+        file_pattern: "*volume1*rtf2*.csv"
+        key: [hhid, lno_f2]
+
+  # Source 2 - PSA microdata catalog (Form 3: mass media and digital skills).
+  # Optional: the pipeline runs without it until its files are added.
+  flemms_2024_v2:
+    type: survey_files
+    title: Functional Literacy, Education and Mass Media Survey 2024 Volume 2
+    provider: Philippine Statistics Authority (PSA)
+    folder: PHL-PSA-FLEMMS-2024-V2-PUF
+    tables: {}
+
+  # Source 3 - REST API, retrieved automatically on every run
+  psgc_regions:
+    type: api
+    title: Philippine Standard Geographic Code - regions
+    endpoint: /regions.json
+    folder: psgc
+    min_records: 17
+
+staging:
+  # Stop if more than this share of a file's rows are duplicates: that usually
+  # means a wrong key or a corrupted download, not genuine repeated records.
+  max_duplicate_share: 0.01
+
+curated:
+  # Business rules for derived fields (documented in docs/data_dictionary.md)
+  age_groups:            # [lower bound, label]; upper bound is the next lower bound
+    - [0, "0-9"]
+    - [10, "10-14"]
+    - [15, "15-24"]
+    - [25, "25-34"]
+    - [35, "35-44"]
+    - [45, "45-54"]
+    - [55, "55-64"]
+    - [65, "65+"]
+  digital_access_tiers:  # digital_access_score (0-5) -> tier
+    "0": "No access"
+    "1": "Low"
+    "2": "Low"
+    "3": "Moderate"
+    "4": "High"
+    "5": "High"
+
+partitioning:
+  column: region_code    # curated person table is stored as region_code=<n>/ folders
+
+warehouse:
+  # Load order: parents before children (foreign keys)
+  tables:
+    - {table: dim_region, strategy: upsert, key: [region_code]}
+    - {table: household, strategy: replace_year}
+    - {table: member, strategy: replace_year}
+    - {table: literacy_assessment, strategy: replace_year}
+    - {table: agg_literacy_digital, strategy: replace_year}
+
+benchmark:
+  table: person_profile  # partitioned curated table used for the format comparison
+  demo_region_code: 13   # NCR

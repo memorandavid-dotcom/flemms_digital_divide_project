@@ -1,0 +1,131 @@
+{
+  "table": "v1_household",
+  "file": "FLEMMS PUF 2024 Volume1 - HOUSEHOLD.CSV",
+  "rows": 177656,
+  "columns": 8,
+  "exact_duplicate_rows": 0,
+  "column_profiles": {
+    "REG": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 17,
+      "top_values": {
+        "13": 23217,
+        "03": 14269,
+        "19": 11946,
+        "06": 11682,
+        "08": 10940
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 9.647
+    },
+    "REG2": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 18,
+      "top_values": {
+        "13": 23217,
+        "03": 14269,
+        "19": 11946,
+        "08": 10940,
+        "10": 10616
+      },
+      "min": 1.0,
+      "max": 19.0,
+      "mean": 10.008
+    },
+    "PRV": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 118,
+      "top_values": {
+        "087": 2832,
+        "036": 2230,
+        "809": 1978,
+        "010": 1801,
+        "035": 1792
+      },
+      "min": 1.0,
+      "max": 999.0,
+      "mean": 187.278
+    },
+    "HHID": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 177656,
+      "top_values": {
+        "000001": 1,
+        "000002": 1,
+        "000003": 1,
+        "000004": 1,
+        "000005": 1
+      },
+      "min": 1.0,
+      "max": 177656.0,
+      "mean": 88828.5
+    },
+    "URBANITY": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 3,
+      "top_values": {
+        "2": 89461,
+        "1": 88147,
+        "3": 48
+      },
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.504
+    },
+    "PSU": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 2126,
+      "top_values": {
+        "00101": 526,
+        "00018": 470,
+        "00050": 455,
+        "00021": 447,
+        "00027": 441
+      },
+      "min": 1.0,
+      "max": 5236.0,
+      "mean": 565.592
+    },
+    "INTVW": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 1,
+      "top_values": {
+        "01": 177656
+      },
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0
+    },
+    "RFACT": {
+      "inferred_type": "numeric",
+      "missing": 0,
+      "missing_pct": 0.0,
+      "distinct": 10614,
+      "top_values": {
+        "    461.14124000": 194,
+        "     85.91584800": 97,
+        "     54.06955700": 95,
+        "    289.18167000": 92,
+        "    307.03040000": 88
+      },
+      "min": 5.2178888,
+      "max": 2137.7371,
+      "mean": 156.393
+    }
+  }
+}

@@ -1,0 +1,238 @@
+# Data contract for the FLEMMS 2024 digital divide pipeline.
+#
+# This file is both documentation AND configuration: src/validation/checks.py
+# reads it and enforces every rule below on every run. A broken rule with
+# severity "error" (the default) fails the Airflow task and stops the pipeline;
+# severity "warning" is logged and reported but does not stop it.
+#
+# Column rules:
+#   type             integer | float | string | boolean
+#   nullable         false -> no missing values allowed (default true)
+#   required         false -> column may be absent (default true)
+#   accepted_values  allowed values (missing values are ignored)
+#   min / max        allowed numeric range (inclusive)
+# Table rules: primary_key (unique, checked for duplicates), min_rows,
+#   foreign_keys (referential integrity), lineage_columns (ignored when
+#   looking for fully duplicated rows).
+
+contract_version: "1.0"
+dataset: flemms_2024_digital_divide
+owner: FLEMMS project team (DSS150P)
+producer:
+  sources:
+    - PSA FLEMMS 2024 Public-Use File, Volume 1 (CSV + data dictionary XLSX)
+    - PSGC regions API (JSON)
+  pipeline: Airflow DAG flemms_digital_divide_pipeline
+consumers:
+  - Analysts / data scientists answering the digital divide research question
+  - SQL users of the PostgreSQL warehouse (tables below with layer "curated")
+refresh: Monthly schedule; full reload of survey_year 2024 on each run (idempotent)
+
+tables:
+  # ===================== STAGING (one table per source file) =====================
+  v1_household:
+    layer: staging
+    description: Household record (ids, PSU, interview status, household weight)
+    primary_key: [hhid]
+    min_rows: 100000
+    lineage_columns: [source_file, source_line, batch_id, ingested_at]
+    columns:
+      hhid: {type: integer, nullable: false}
+      reg: {type: integer, nullable: false, accepted_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19]}
+      reg2: {type: integer, nullable: false, accepted_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19]}
+      prv: {type: integer, nullable: false}
+      urbanity: {type: integer, nullable: false, accepted_values: [1, 2, 3]}
+      psu: {type: integer, nullable: false}
+      intvw: {type: integer, nullable: false, accepted_values: [1], severity: warning}
+      rfact: {type: float, nullable: false, min: 0.000001}
+
+  v1_household_questions:
+    layer: staging
+    description: RTF1 household questions (housing, assets, internet, ICT use)
+    primary_key: [hhid]
+    min_rows: 100000
+    lineage_columns: [source_file, source_line, batch_id, ingested_at]
+    columns:
+      hhid: {type: integer, nullable: false}
+      beneficiary_4ps: {type: integer, nullable: false, accepted_values: [1, 2]}
+      electricity: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_smartphone: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_basicphone: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_pc: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_tablet: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_cabnet: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_nocabnet: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_mobsub: {type: integer, nullable: false, accepted_values: [1, 2]}
+      ict_equip: {type: integer, nullable: false, accepted_values: [1, 2]}
+      hh_rfact: {type: float, nullable: false, min: 0.000001}
+    foreign_keys:
+      - columns: [hhid]
+        references: {table: v1_household, columns: [hhid]}
+
+  v1_member:
+    layer: staging
+    description: Household member roster (Form 1)
+    primary_key: [hhid, lno]
+    min_rows: 300000
+    lineage_columns: [source_file, source_line, batch_id, ingested_at]
+    columns:
+      hhid: {type: integer, nullable: false}
+      lno: {type: integer, nullable: false, min: 1, max: 99}
+      sex: {type: integer, nullable: false, accepted_values: [1, 2]}
+      age: {type: integer, nullable: false, min: 0, max: 99}   # 99 = unknown
+      hgc_level: {type: integer, accepted_values: [0, 1, 2, 3, 4, 5, 6, 7, 8]}
+      attend_school: {type: integer, accepted_values: [1, 2, 3, 4]}
+      mem_rfact: {type: float, nullable: false, min: 0.000001}
+    foreign_keys:
+      - columns: [hhid]
+        references: {table: v1_household, columns: [hhid]}
+
+  v1_literacy:
+    layer: staging
+    description: RTF2 literacy indicators from Forms 2A/2B/2C (persons 5 years old and over)
+    primary_key: [hhid, lno_f2]
+    min_rows: 300000
+    lineage_columns: [source_file, source_line, batch_id, ingested_at]
+    columns:
+      hhid: {type: integer, nullable: false}
+      lno_f2: {type: integer, nullable: false, min: 1, max: 99}
+      result_code_f2: {type: integer, nullable: false, accepted_values: [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+      age_f2: {type: integer, nullable: false, min: 5, max: 99}
+      bliterate: {type: integer, accepted_values: [1, 2]}
+      fliterate: {type: integer, accepted_values: [1, 2]}
+      fllevel: {type: integer, accepted_values: [0, 1, 2, 3]}
+      resp_rfact_f2: {type: float, nullable: false, min: 0}
+    foreign_keys:
+      - columns: [hhid, lno_f2]
+        references: {table: v1_member, columns: [hhid, lno]}
+
+  # ===================== CURATED (loaded into PostgreSQL) =====================
+  dim_region:
+    layer: curated
+    description: Philippine regions with official PSGC names (from the PSGC API)
+    primary_key: [region_code]
+    min_rows: 17
+    columns:
+      region_code: {type: integer, nullable: false, min: 1, max: 19}
+      region_name: {type: string, nullable: false}
+      region_short_name: {type: string, nullable: false}
+      island_group: {type: string, nullable: false, accepted_values: [Luzon, Visayas, Mindanao]}
+      psgc_code: {type: string, nullable: false}
+
+  household:
+    layer: curated
+    description: One row per surveyed household with location and digital access indicators
+    primary_key: [survey_year, hhid]
+    min_rows: 100000
+    lineage_columns: [batch_id]
+    columns:
+      survey_year: {type: integer, nullable: false, accepted_values: [2024]}
+      hhid: {type: integer, nullable: false}
+      region_code: {type: integer, nullable: false}
+      region_code_nir: {type: integer, nullable: false}
+      province_code: {type: integer, nullable: false}
+      psu: {type: integer, nullable: false}
+      urbanity: {type: string, nullable: false, accepted_values: [Urban, Rural, No official classification]}
+      is_4ps_beneficiary: {type: boolean, nullable: false}
+      has_electricity: {type: boolean, nullable: false}
+      owns_smartphone: {type: boolean, nullable: false}
+      owns_basic_phone: {type: boolean, nullable: false}
+      owns_computer: {type: boolean, nullable: false}
+      owns_tablet: {type: boolean, nullable: false}
+      has_internet_cable: {type: boolean, nullable: false}
+      has_internet_no_cable: {type: boolean, nullable: false}
+      has_home_internet: {type: boolean, nullable: false}
+      has_mobile_subscription: {type: boolean, nullable: false}
+      used_ict_for_learning: {type: boolean, nullable: false}
+      digital_access_score: {type: integer, nullable: false, min: 0, max: 5}
+      digital_access_tier: {type: string, nullable: false, accepted_values: [No access, Low, Moderate, High]}
+      household_weight: {type: float, nullable: false, min: 0.000001}
+      batch_id: {type: string, nullable: false}
+    foreign_keys:
+      - columns: [region_code]
+        references: {table: dim_region, columns: [region_code]}
+
+  member:
+    layer: curated
+    description: One row per household member
+    primary_key: [survey_year, hhid, line_no]
+    min_rows: 300000
+    lineage_columns: [batch_id]
+    columns:
+      survey_year: {type: integer, nullable: false, accepted_values: [2024]}
+      hhid: {type: integer, nullable: false}
+      line_no: {type: integer, nullable: false, min: 1}
+      sex: {type: string, nullable: false, accepted_values: [Male, Female]}
+      age: {type: integer, min: 0, max: 98}  # missing when PSA code 99 (unknown)
+      age_group: {type: string, accepted_values: ["0-9", "10-14", "15-24", "25-34", "35-44", "45-54", "55-64", "65+"]}
+      education_level_code: {type: integer, min: 0, max: 8}
+      education_level: {type: string}
+      attending_school: {type: boolean}
+      member_weight: {type: float, nullable: false, min: 0.000001}
+      batch_id: {type: string, nullable: false}
+    foreign_keys:
+      - columns: [survey_year, hhid]
+        references: {table: household, columns: [survey_year, hhid]}
+
+  literacy_assessment:
+    layer: curated
+    description: One row per person 5+ covered by the Form 2 literacy assessment
+    primary_key: [survey_year, hhid, line_no]
+    min_rows: 300000
+    lineage_columns: [batch_id]
+    columns:
+      survey_year: {type: integer, nullable: false, accepted_values: [2024]}
+      hhid: {type: integer, nullable: false}
+      line_no: {type: integer, nullable: false, min: 1}
+      result_code: {type: integer, nullable: false, accepted_values: [1, 2, 3, 4, 5, 6, 7, 8, 9]}
+      result: {type: string, nullable: false}
+      interview_completed: {type: boolean, nullable: false}
+      can_read: {type: boolean}
+      can_write: {type: boolean}
+      can_compute: {type: boolean}
+      can_comprehend: {type: boolean}
+      functional_literacy_level_code: {type: integer, min: 0, max: 3}
+      functional_literacy_level: {type: string, accepted_values: [Illiterate, Low Literate, Basic Literate, Functional Literate]}
+      basic_literate: {type: boolean}
+      functional_literate: {type: boolean}
+      respondent_weight: {type: float, nullable: false, min: 0}
+      batch_id: {type: string, nullable: false}
+    foreign_keys:
+      - columns: [survey_year, hhid, line_no]
+        references: {table: member, columns: [survey_year, hhid, line_no]}
+
+  agg_literacy_digital:
+    layer: curated
+    description: Weighted literacy rates of persons 10-64 by region, age group and household digital access tier
+    primary_key: [survey_year, region_code, age_group, digital_access_tier]
+    min_rows: 50
+    lineage_columns: [batch_id]
+    columns:
+      survey_year: {type: integer, nullable: false}
+      region_code: {type: integer, nullable: false}
+      age_group: {type: string, nullable: false}
+      digital_access_tier: {type: string, nullable: false, accepted_values: [No access, Low, Moderate, High]}
+      persons_sampled: {type: integer, nullable: false, min: 1}
+      weighted_population: {type: float, nullable: false, min: 0}
+      functional_literacy_rate: {type: float, min: 0, max: 100}
+      basic_literacy_rate: {type: float, min: 0, max: 100}
+      batch_id: {type: string, nullable: false}
+    foreign_keys:
+      - columns: [region_code]
+        references: {table: dim_region, columns: [region_code]}
+
+  person_profile:
+    layer: curated
+    description: Analysis-ready table, one row per member with household and literacy fields (Parquet, partitioned by region_code; not loaded to PostgreSQL, see view v_person_profile)
+    primary_key: [hhid, line_no]
+    min_rows: 300000
+    columns:
+      survey_year: {type: integer, nullable: false}
+      region_code: {type: integer, nullable: false}
+      region_name: {type: string, nullable: false}
+      hhid: {type: integer, nullable: false}
+      line_no: {type: integer, nullable: false}
+      digital_access_tier: {type: string, nullable: false}
+    foreign_keys:
+      - columns: [survey_year, hhid, line_no]
+        references: {table: member, columns: [survey_year, hhid, line_no]}

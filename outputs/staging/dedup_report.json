@@ -1,0 +1,57 @@
+{
+  "batch_id": "manual__2026-10-05T05:54:36.567625+00:00",
+  "run_at": "2026-10-05T05:55:58+00:00",
+  "tables": {
+    "v1_household": {
+      "rows_in": 177656,
+      "exact_duplicates_removed": 0,
+      "rows_sharing_a_key": 0,
+      "key_duplicates_removed": 0,
+      "rows_out": 177656,
+      "key": [
+        "hhid"
+      ],
+      "typed_columns": 8,
+      "output": "v1_household.parquet"
+    },
+    "v1_household_questions": {
+      "rows_in": 177656,
+      "exact_duplicates_removed": 0,
+      "rows_sharing_a_key": 0,
+      "key_duplicates_removed": 0,
+      "rows_out": 177656,
+      "key": [
+        "hhid"
+      ],
+      "typed_columns": 61,
+      "output": "v1_household_questions.parquet"
+    },
+    "v1_member": {
+      "rows_in": 650424,
+      "exact_duplicates_removed": 0,
+      "rows_sharing_a_key": 0,
+      "key_duplicates_removed": 0,
+      "rows_out": 650424,
+      "key": [
+        "hhid",
+        "lno"
+      ],
+      "typed_columns": 45,
+      "output": "v1_member.parquet"
+    },
+    "v1_literacy": {
+      "rows_in": 610590,
+      "exact_duplicates_removed": 0,
+      "rows_sharing_a_key": 0,
+      "key_duplicates_removed": 0,
+      "rows_out": 610590,
+      "key": [
+        "hhid",
+        "lno_f2"
+      ],
+      "typed_columns": 28,
+      "output": "v1_literacy.parquet"
+    }
+  },
+  "codebook_labels": 2501
+}
