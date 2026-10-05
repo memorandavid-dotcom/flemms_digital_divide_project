@@ -1,30 +1,23 @@
-# Ignore all data directories
-data/
-data/raw/
-data/processed/
-data/final/
+# --- Data: keep the folder layout, never commit survey microdata ---
+data/**
+!data/**/
+!data/**/.gitkeep
 
-# Ignore large data extensions
-*.csv
-*.csdb
-*.xlsx
-*.parquet
+# --- Secrets ---
+.env
 
-# Ignore environments and cache
-.venv/
-venv/
-__pycache__/
-.DS_Store
+# --- Airflow runtime files ---
+logs/
 
-# Ignore data folders (we only track code, not large datasets)
-data/raw/
-data/processed/
-data/final/
-
-# Ignore Python cache
+# --- Python ---
 __pycache__/
 *.pyc
-
-# Ignore virtual environments
 .venv/
 venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
