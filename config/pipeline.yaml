@@ -15,19 +15,30 @@ sources:
     title: Functional Literacy, Education and Mass Media Survey 2024 Volume 1
     provider: Philippine Statistics Authority (PSA)
     folder: PHL-PSA-FLEMMS-2024-V1-PUF
+    # PSA's data dictionary (variable labels + value labels), read automatically
+    codebook_pattern: "*dictionary*.xlsx"
     tables:
-      v1_household:
+      v1_household:            # Form 1 household record: ids, PSU, weight
+        file_pattern: "*volume1*household*.csv"
+        key: [hhid]
+      v1_household_questions:  # RTF1: housing, assets, internet, ICT use
         file_pattern: "*volume1*rtf1*.csv"
-      v1_member:
+        key: [hhid]
+      v1_member:               # Form 1 member roster: age, sex, education
         file_pattern: "*volume1*member*.csv"
+        key: [hhid, lno]
+      v1_literacy:             # RTF2: literacy indicators from Forms 2A/2B/2C
+        file_pattern: "*volume1*rtf2*.csv"
+        key: [hhid, lno_f2]
 
-  # Source 2 - PSA microdata catalog (manual download: login + terms of use)
+  # Source 2 - PSA microdata catalog (Form 3: mass media and digital skills).
+  # Optional: the pipeline runs without it until its files are added.
   flemms_2024_v2:
     type: survey_files
     title: Functional Literacy, Education and Mass Media Survey 2024 Volume 2
     provider: Philippine Statistics Authority (PSA)
     folder: PHL-PSA-FLEMMS-2024-V2-PUF
-    tables: {}  # filled in once the Volume 2 files are inspected
+    tables: {}
 
   # Source 3 - REST API, retrieved automatically on every run
   psgc_regions:
@@ -41,3 +52,38 @@ staging:
   # Stop if more than this share of a file's rows are duplicates: that usually
   # means a wrong key or a corrupted download, not genuine repeated records.
   max_duplicate_share: 0.01
+
+curated:
+  # Business rules for derived fields (documented in docs/data_dictionary.md)
+  age_groups:            # [lower bound, label]; upper bound is the next lower bound
+    - [0, "0-9"]
+    - [10, "10-14"]
+    - [15, "15-24"]
+    - [25, "25-34"]
+    - [35, "35-44"]
+    - [45, "45-54"]
+    - [55, "55-64"]
+    - [65, "65+"]
+  digital_access_tiers:  # digital_access_score (0-5) -> tier
+    "0": "No access"
+    "1": "Low"
+    "2": "Low"
+    "3": "Moderate"
+    "4": "High"
+    "5": "High"
+
+partitioning:
+  column: region_code    # curated person table is stored as region_code=<n>/ folders
+
+warehouse:
+  # Load order: parents before children (foreign keys)
+  tables:
+    - {table: dim_region, strategy: upsert, key: [region_code]}
+    - {table: household, strategy: replace_year}
+    - {table: member, strategy: replace_year}
+    - {table: literacy_assessment, strategy: replace_year}
+    - {table: agg_literacy_digital, strategy: replace_year}
+
+benchmark:
+  table: person_profile  # partitioned curated table used for the format comparison
+  demo_region_code: 13   # NCR

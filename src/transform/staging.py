@@ -8,6 +8,7 @@ Allowed in this layer (no joins, no business logic yet):
   * rows that repeat a primary key removed (first one kept); the removed rows are
     saved to data/staging/_rejects/ so nothing disappears without a trace
   * lineage columns added: source_file, source_line, batch_id, ingested_at
+  * PSA's value-label sheet (data dictionary .xlsx) parsed into codebook.parquet
 
 Each table is written to data/staging/<table>.parquet, replacing the previous
 version, so re-running this step never duplicates data.
@@ -18,7 +19,7 @@ import re
 import pandas as pd
 
 from src.config import layer_path, settings
-from src.extract.ingest_survey import detect_encoding, locate, survey_tables
+from src.extract.ingest_survey import detect_encoding, locate, locate_codebooks, survey_tables
 from src.utils.io_utils import utc_now, write_json
 from src.utils.logging_utils import get_logger
 
@@ -81,6 +82,42 @@ def deduplicate(df: pd.DataFrame, key: list[str], data_columns: list[str]) -> tu
     return df, rejects, stats
 
 
+def parse_codebook(path) -> pd.DataFrame:
+    """Turn PSA's value-set sheet into one row per (variable, code range, label).
+
+    In the sheet a value set starts with a row like  REG_VS1 | Region
+    followed by rows                                  _ | _ | label | from | to
+    """
+    sheet = pd.read_excel(path, sheet_name=1, header=None, dtype=str)
+    rows, value_set, set_label = [], None, None
+    for r in sheet.itertuples(index=False):
+        if pd.notna(r[0]):
+            value_set, set_label = r[0].strip(), (r[1] or "").strip()
+        elif value_set and pd.notna(r[3]):
+            rows.append({
+                "value_set": value_set,
+                "variable": clean_column_name(value_set.split("_VS")[0]),
+                "variable_label": set_label,
+                "value_from": int(float(r[3])),
+                "value_to": int(float(r[4])) if pd.notna(r[4]) else int(float(r[3])),
+                "value_label": r[2].strip() if pd.notna(r[2]) else None,
+            })
+    return pd.DataFrame(rows)
+
+
+def build_codebook() -> int:
+    frames = []
+    for source, path in locate_codebooks().items():
+        book = parse_codebook(path)
+        book.insert(0, "source", source)
+        frames.append(book)
+    codebook = pd.concat(frames, ignore_index=True)
+    codebook.to_parquet(layer_path("staging") / "codebook.parquet", index=False)
+    log.info("Codebook staged: %d value labels for %d variables",
+             len(codebook), codebook["variable"].nunique())
+    return len(codebook)
+
+
 def build_staging(batch_id: str) -> dict:
     staging = layer_path("staging")
     max_share = settings()["staging"]["max_duplicate_share"]
@@ -129,6 +166,7 @@ def build_staging(batch_id: str) -> dict:
                  item["table"], f"{stats['rows_in']:,}", f"{stats['rows_out']:,}",
                  stats["exact_duplicates_removed"], stats["key_duplicates_removed"])
 
+    report["codebook_labels"] = build_codebook()
     out_dir = layer_path("outputs") / "staging"
     write_json(report, out_dir / "dedup_report.json")
     return {t: s["rows_out"] for t, s in report["tables"].items()}

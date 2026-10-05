@@ -58,6 +58,15 @@ def locate(item: dict) -> Path:
     return find_source_file(layer_path("raw") / item["folder"], item["file_pattern"])
 
 
+def locate_codebooks() -> dict[str, Path]:
+    """PSA data dictionaries (.xlsx), one per source that declares codebook_pattern."""
+    found = {}
+    for name, source in settings()["sources"].items():
+        if source.get("codebook_pattern"):
+            found[name] = find_source_file(layer_path("raw") / source["folder"], source["codebook_pattern"])
+    return found
+
+
 def ingest_survey_files(batch_id: str) -> dict:
     manifest_dir = layer_path("raw") / "_manifests"
     previous_file = manifest_dir / "latest.json"
@@ -97,6 +106,17 @@ def ingest_survey_files(batch_id: str) -> dict:
         log.info("Registered %-12s %s | %s | %d lines x %d cols | %.1f MB",
                  item["table"], path.name, encoding, entries[item["table"]]["data_lines"],
                  len(header), path.stat().st_size / 1e6)
+
+    for source, path in locate_codebooks().items():
+        entries[f"{source}_codebook"] = {
+            "source": source,
+            "file": path.name,
+            "path": path.relative_to(PROJECT_ROOT).as_posix(),
+            "sha256": sha256_of(path),
+            "size_bytes": path.stat().st_size,
+            "data_lines": None,
+        }
+        log.info("Registered codebook %s", path.name)
 
     manifest = {"batch_id": batch_id, "ingested_at": utc_now(), "files": entries}
     write_json(manifest, manifest_dir / f"ingest_{safe_name(batch_id)}.json")
