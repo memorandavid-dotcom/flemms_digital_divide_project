@@ -1,6 +1,6 @@
 -- Representative queries for the FLEMMS 2024 warehouse.
--- Run inside the container:
---   docker compose exec warehouse-db psql -U flemms -d flemms -f /dev/stdin < sql/02_representative_queries.sql
+-- Run inside the container (same command on Windows, macOS and Linux):
+--   docker compose exec warehouse-db psql -U flemms -d flemms -f /sql/02_representative_queries.sql
 -- Rates are survey-weighted: literacy uses respondent_weight, household shares use household_weight.
 
 -- 1. Load check: row counts and the load history (rerun safety: counts stay the same)

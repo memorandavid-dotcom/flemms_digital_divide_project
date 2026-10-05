@@ -69,6 +69,7 @@ services:
       - "${WAREHOUSE_PORT:-5433}:5432"
     volumes:
       - warehouse-db-volume:/var/lib/postgresql/data
+      - ./sql:/sql:ro   # lets you run: docker compose exec warehouse-db psql ... -f /sql/<file>
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${WAREHOUSE_USER}", "-d", "${WAREHOUSE_DB}"]
       interval: 10s
