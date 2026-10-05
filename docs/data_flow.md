@@ -1,6 +1,6 @@
 # Data flow and lineage
 
-How each source file moves through the layers, and what happens to it at each step.
+How each source file moves through the layers, and what happens to it at each step. Image file: [images/data_flow.png](images/data_flow.png).
 
 ```mermaid
 flowchart TD

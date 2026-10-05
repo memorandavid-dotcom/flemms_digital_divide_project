@@ -2,54 +2,46 @@
 
 The diagram shows the system as implemented in this repository. Every box maps to a file or a Docker service.
 
+Image files for slides and the report: [images/architecture.png](images/architecture.png) (vertical) and [images/architecture_wide.png](images/architecture_wide.png) (wide). Regenerate them with `python docs/render_diagrams.py` after editing the diagram.
+
 ```mermaid
-flowchart LR
-    subgraph SRC["Sources"]
-        S1["PSA FLEMMS 2024 Vol. 1<br/>4 CSV files<br/>(manual download, login)"]
+flowchart TB
+    subgraph SRC["1. Sources"]
+        S1["PSA FLEMMS 2024 Vol. 1<br/>4 CSV files"]
         S1B["PSA data dictionary<br/>XLSX"]
         S3["PSGC regions API<br/>REST / JSON"]
-        S2["PSA FLEMMS 2024 Vol. 2<br/>(planned, not yet ingested)"]
+        S2["FLEMMS 2024 Vol. 2<br/>(planned)"]
     end
 
     subgraph DOCKER["Docker Compose"]
-        subgraph AF["Apache Airflow 3.3 (LocalExecutor)"]
-            DAG["DAG flemms_digital_divide_pipeline<br/>schedule @monthly, retries, failure callback"]
+        AF["Apache Airflow 3.3<br/>DAG: flemms_digital_divide_pipeline<br/>monthly, retries, failure callback"]
+        META[("Airflow<br/>metadata DB")]
+        subgraph LAKE["2. File layers (data/)"]
+            RAW["raw<br/>files as received<br/>+ ingestion manifest"]
+            STG["staging<br/>typed, de-duplicated<br/>Parquet + codebook"]
+            CUR["curated<br/>joined tables (Parquet)<br/>person table partitioned by region"]
         end
-
-        subgraph LAKE["File layers (data/)"]
-            RAW["raw/<br/>files exactly as received<br/>+ ingestion manifest (JSON)"]
-            STG["staging/<br/>typed, de-duplicated Parquet<br/>+ codebook"]
-            CUR["curated/<br/>integrated Parquet<br/>person_profile partitioned by region"]
-        end
-
-        VAL{{"Validation<br/>docs/data_contract.yaml<br/>10 check types"}}
-        PG[("PostgreSQL 16 warehouse<br/>dim_region, household, member,<br/>literacy_assessment, agg_literacy_digital,<br/>pipeline_run, v_person_profile")]
-        META[("PostgreSQL 16<br/>Airflow metadata")]
+        PG[("3. PostgreSQL 16 warehouse<br/>5 tables + audit table + view")]
     end
 
-    subgraph USE["Consumption"]
-        SQL["SQL queries<br/>sql/02_representative_queries.sql"]
-        NB["Analysis notebook / dashboard"]
-        REP["Reports in outputs/<br/>validation, profiling,<br/>format benchmark"]
+    subgraph USE["4. Consumption"]
+        SQL["SQL queries"]
+        NB["Analysis / dashboard"]
+        REP["Reports: validation,<br/>profiling, format benchmark"]
     end
 
-    S1 -->|ingest_survey_files| RAW
-    S1B -->|ingest_survey_files| RAW
-    S3 -->|fetch_region_codes| RAW
+    S1 -->|ingest| RAW
+    S1B -->|ingest| RAW
+    S3 -->|fetch with retries| RAW
     S2 -.->|future| RAW
-    RAW -->|build_staging| STG
-    STG --> VAL
-    VAL -->|pass| CUR
-    CUR --> VAL
-    VAL -->|pass, load_warehouse| PG
+    RAW -->|clean + de-duplicate| STG
+    STG -->|"validate (data contract), join"| CUR
+    CUR -->|"validate (data contract), load"| PG
     PG --> SQL
-    CUR --> NB
     PG --> NB
-    VAL --> REP
-    DAG -. orchestrates .-> RAW
-    DAG -. orchestrates .-> STG
-    DAG -. orchestrates .-> CUR
-    DAG -. orchestrates .-> PG
+    CUR --> NB
+    LAKE --> REP
+    AF -.->|runs every step| LAKE
     AF --- META
 ```
 

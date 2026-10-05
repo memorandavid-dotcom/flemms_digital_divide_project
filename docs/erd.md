@@ -1,9 +1,10 @@
 # Warehouse ERD (PostgreSQL)
 
-Created by `sql/01_create_schema.sql`. Keys: **PK** primary key, **FK** foreign key.
+Created by `sql/01_create_schema.sql`. Keys: **PK** primary key, **FK** foreign key. Image file: [images/erd.png](images/erd.png).
 
 ```mermaid
 erDiagram
+    direction LR
     dim_region ||--o{ household : "region_code"
     dim_region ||--o{ agg_literacy_digital : "region_code"
     household ||--|{ member : "survey_year, hhid"
