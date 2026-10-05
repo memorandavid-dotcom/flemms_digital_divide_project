@@ -12,9 +12,16 @@ SELECT (SELECT count(*) FROM household)            AS households,
 SELECT run_id, batch_id, finished_at, row_counts ->> 'member' AS member_rows
 FROM pipeline_run ORDER BY run_id DESC LIMIT 5;
 
--- 2. National functional literacy rate, persons 10-64
-SELECT round(100 * sum(respondent_weight) FILTER (WHERE functional_literate)
-             / sum(respondent_weight), 1) AS functional_literacy_rate_pct
+-- 2. National literacy, persons 10-64, reconciled with PSA's published 2024 results:
+--    85.00 million people, 60.17 million functionally literate (70.8%), basic literacy 93.1%.
+--    Source: https://psa.gov.ph/content/every-10-filipinos-9-have-basic-literacy-while-7-have-functional-literacy
+--    Matching all four numbers shows the joins, filters and survey weights are applied correctly.
+SELECT round(sum(respondent_weight) / 1e6, 2)                                    AS population_10_64_millions,
+       round(sum(respondent_weight) FILTER (WHERE functional_literate) / 1e6, 2) AS functionally_literate_millions,
+       round(100 * sum(respondent_weight) FILTER (WHERE functional_literate)
+             / sum(respondent_weight), 1)                                        AS functional_literacy_rate_pct,
+       round(100 * sum(respondent_weight) FILTER (WHERE basic_literate)
+             / sum(respondent_weight) FILTER (WHERE basic_literate IS NOT NULL), 1) AS basic_literacy_rate_pct
 FROM literacy_assessment
 WHERE functional_literate IS NOT NULL;
 

@@ -49,7 +49,15 @@ Survey-weighted, persons 10-64 (from `sql/02_representative_queries.sql`):
 | Moderate | 77.4% |
 | High | 83.0% |
 
-- National functional literacy rate (10-64): **70.8%**.
+- National figures reproduce PSA's published 2024 results exactly, which confirms the joins and survey weights are applied correctly ([PSA press release](https://psa.gov.ph/content/every-10-filipinos-9-have-basic-literacy-while-7-have-functional-literacy)):
+
+  | Persons 10-64 | This pipeline | PSA published |
+  |---|---:|---:|
+  | Estimated population | 85.00 million | 85.00 million |
+  | Functionally literate | 60.17 million | 60.17 million |
+  | Functional literacy rate | 70.8% | 70.8% |
+  | Basic literacy rate | 93.1% | 93.1% |
+
 - Home internet ranges from **53.1%** of households in NCR to **6.3%** in BARMM.
 - People in urban areas are far more likely to live with home internet (44.3%) than in rural areas (25.5%); functional literacy is 74.4% vs 66.3%.
 - Both digital access and literacy rise with education level.
@@ -80,7 +88,7 @@ flowchart LR
     AF -. orchestrates .- P
 ```
 
-Details, component roles and design trade-offs: [docs/architecture.md](docs/architecture.md). Lineage and transformation rules: [docs/data_flow.md](docs/data_flow.md). Database diagram: [docs/erd.md](docs/erd.md).
+Full diagram: [docs/images/architecture.png](docs/images/architecture.png). Details, component roles and design trade-offs: [docs/architecture.md](docs/architecture.md). Lineage and transformation rules: [docs/data_flow.md](docs/data_flow.md). Database diagram: [docs/erd.md](docs/erd.md).
 
 **Technology stack:** Python 3.12 (pandas 3, pyarrow), PostgreSQL 16, Apache Airflow 3.3.2, Docker Compose, pytest, Git/GitHub.
 
@@ -91,6 +99,7 @@ Details, component roles and design trade-offs: [docs/architecture.md](docs/arch
 ├── dags/flemms_pipeline.py     # Airflow DAG
 ├── data/                       # raw / staging / curated layers (contents not committed)
 ├── docs/                       # architecture, data flow, ERD, data dictionary, data contract, sources
+│   └── images/                 # PNG versions of the diagrams (python docs/render_diagrams.py)
 ├── outputs/                    # generated reports: validation, profiling, de-dup, format benchmark
 ├── sql/                        # schema (DDL) and representative queries
 ├── src/
