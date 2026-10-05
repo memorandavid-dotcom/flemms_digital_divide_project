@@ -1,0 +1,43 @@
+# Pipeline settings that are not secrets. Passwords and hosts live in .env.
+survey_year: 2024
+
+# Folders, relative to the project root
+paths:
+  raw: data/raw          # source files exactly as downloaded / fetched
+  staging: data/staging  # cleaned, typed, de-duplicated copies (Parquet)
+  curated: data/curated  # integrated, analysis-ready tables (Parquet, partitioned)
+  outputs: outputs       # validation reports, profiling, format benchmark
+
+sources:
+  # Source 1 - PSA microdata catalog (manual download: login + terms of use)
+  flemms_2024_v1:
+    type: survey_files
+    title: Functional Literacy, Education and Mass Media Survey 2024 Volume 1
+    provider: Philippine Statistics Authority (PSA)
+    folder: PHL-PSA-FLEMMS-2024-V1-PUF
+    tables:
+      v1_household:
+        file_pattern: "*volume1*rtf1*.csv"
+      v1_member:
+        file_pattern: "*volume1*member*.csv"
+
+  # Source 2 - PSA microdata catalog (manual download: login + terms of use)
+  flemms_2024_v2:
+    type: survey_files
+    title: Functional Literacy, Education and Mass Media Survey 2024 Volume 2
+    provider: Philippine Statistics Authority (PSA)
+    folder: PHL-PSA-FLEMMS-2024-V2-PUF
+    tables: {}  # filled in once the Volume 2 files are inspected
+
+  # Source 3 - REST API, retrieved automatically on every run
+  psgc_regions:
+    type: api
+    title: Philippine Standard Geographic Code - regions
+    endpoint: /regions.json
+    folder: psgc
+    min_records: 17
+
+staging:
+  # Stop if more than this share of a file's rows are duplicates: that usually
+  # means a wrong key or a corrupted download, not genuine repeated records.
+  max_duplicate_share: 0.01
