@@ -13,6 +13,7 @@ Check types implemented (each returns a CheckResult):
     accepted_values    values come from an allowed list
     range              numeric values fall inside [min, max]
     foreign_key        every key exists in the parent table (referential integrity)
+    row_reconciliation raw rows = staged rows + duplicates removed (no silent row loss)
 
 run_validation() logs every result, writes a JSON report to outputs/validation/,
 and raises DataQualityError if any check with severity "error" fails, which
@@ -113,6 +114,14 @@ def check_range(df: pd.DataFrame, table: str, column: str, low=None, high=None) 
                        f"{len(bad):,} values outside [{low}, {high}]")
 
 
+def check_row_reconciliation(table: str, raw_rows: int, kept: int, removed: int) -> CheckResult:
+    """Every raw row is accounted for: kept in staging or removed as a duplicate."""
+    ok = raw_rows == kept + removed
+    return CheckResult(table, "row_reconciliation", "*", ok, abs(raw_rows - kept - removed),
+                       f"raw {raw_rows:,} = staged {kept:,} + duplicates removed {removed:,}"
+                       + ("" if ok else " (MISMATCH)"))
+
+
 def check_foreign_key(child: pd.DataFrame, table: str, columns: list[str],
                       parent: pd.DataFrame, parent_table: str, parent_columns: list[str]) -> CheckResult:
     keys = child[columns].dropna().drop_duplicates()
@@ -162,10 +171,11 @@ def validate_table(df: pd.DataFrame, name: str, spec: dict,
     return results
 
 
-def run_validation(stage: str, tables: dict[str, pd.DataFrame], batch_id: str) -> list[CheckResult]:
+def run_validation(stage: str, tables: dict[str, pd.DataFrame], batch_id: str,
+                   extra_results: list[CheckResult] | None = None) -> list[CheckResult]:
     """Validate the given tables against the contract and stop the pipeline on failure."""
     contract = load_contract()
-    results: list[CheckResult] = []
+    results: list[CheckResult] = list(extra_results or [])
     for name, df in tables.items():
         spec = contract["tables"].get(name)
         if spec is None:
