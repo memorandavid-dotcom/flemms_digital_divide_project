@@ -14,6 +14,7 @@ import pandas as pd
 import pyarrow.dataset as ds
 
 from src.config import layer_path, settings
+from src.transform.curated import person_profile_dataset, read_person_profile
 from src.utils.io_utils import utc_now, write_json
 from src.utils.logging_utils import get_logger
 
@@ -34,8 +35,7 @@ def _types_preserved(original: pd.DataFrame, reloaded: pd.DataFrame) -> str:
 def benchmark_formats(batch_id: str) -> str:
     cfg = settings()["benchmark"]
     curated = layer_path("curated")
-    source = curated / cfg["table"]
-    df = pd.read_parquet(source)
+    df = read_person_profile()
     work = curated / "_format_benchmark"
     shutil.rmtree(work, ignore_errors=True)
     work.mkdir(parents=True)
@@ -60,7 +60,7 @@ def benchmark_formats(batch_id: str) -> str:
     # Partition pruning: one region vs all regions
     region = cfg["demo_region_code"]
     key = settings()["partitioning"]["column"]
-    dataset = ds.dataset(source, format="parquet", partitioning="hive")
+    dataset = person_profile_dataset()
     full, full_s = _timed(lambda: dataset.to_table())
     part, part_s = _timed(lambda: dataset.to_table(filter=ds.field(key) == region))
     files_total = len(dataset.files)
