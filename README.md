@@ -34,9 +34,11 @@ The PSA publishes FLEMMS as raw, coded microdata spread over several files, with
 
 ## 2. Team
 
-| Member | Role |
-|---|---|
-| _(to be filled in)_ | |
+| Member | Role | Main responsibilities |
+|---|---|---|
+| Claudia Martin | Data Scientist / Analyst | Problem framing and stakeholders, source profiling, analysis and interpretation of results |
+| Jenna Valerio | Data Engineer (pipeline and data quality) | Ingestion, staging and curated transformations, data contract and validation, PostgreSQL model |
+| David Memorando | Data Engineer (orchestration and deployment) | Airflow DAG, Docker environment, repository, live demonstration |
 
 ## 3. What the pipeline found
 
