@@ -93,7 +93,7 @@ def load_tables(tables: dict[str, pd.DataFrame], batch_id: str) -> dict[str, int
 
                 cur.execute(
                     "INSERT INTO pipeline_run (batch_id, survey_year, started_at, finished_at, row_counts) "
-                    "VALUES (%s, %s, %s, now(), %s::jsonb)",
+                    "VALUES (%s, %s, %s, clock_timestamp(), %s::jsonb)",
                     (batch_id, year, started, pd.Series(counts).to_json()))
     finally:
         conn.close()
