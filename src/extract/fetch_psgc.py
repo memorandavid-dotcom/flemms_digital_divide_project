@@ -1,4 +1,4 @@
-"""Source 3: official region names from the PSGC API (REST, JSON).
+"""Source 2: official region names from the PSGC API (REST, JSON).
 
 The survey only stores numeric region codes. This module downloads the
 Philippine Standard Geographic Code (PSGC) region list so the curated layer

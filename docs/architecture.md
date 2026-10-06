@@ -7,10 +7,9 @@ Image files for slides and the report: [images/architecture.png](images/architec
 ```mermaid
 flowchart TB
     subgraph SRC["1. Sources"]
-        S1["PSA FLEMMS 2024 Vol. 1<br/>4 CSV files"]
+        S1["PSA FLEMMS 2024<br/>4 CSV files"]
         S1B["PSA data dictionary<br/>XLSX"]
         S3["PSGC regions API<br/>REST / JSON"]
-        S2["FLEMMS 2024 Vol. 2<br/>(planned)"]
     end
 
     subgraph DOCKER["Docker Compose"]
@@ -33,7 +32,6 @@ flowchart TB
     S1 -->|ingest| RAW
     S1B -->|ingest| RAW
     S3 -->|fetch with retries| RAW
-    S2 -.->|future| RAW
     RAW -->|clean + de-duplicate| STG
     STG -->|"validate (data contract), join"| CUR
     CUR -->|"validate (data contract), load"| PG

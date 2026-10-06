@@ -1,6 +1,6 @@
 {
-  "batch_id": "manual__2026-10-05T05:54:36.567625+00:00",
-  "run_at": "2026-10-05T05:59:26+00:00",
+  "batch_id": "manual__2026-10-05T09:13:06.913597+00:00",
+  "run_at": "2026-10-05T09:17:15+00:00",
   "table": "person_profile",
   "rows": 650424,
   "columns": 29,
@@ -8,22 +8,22 @@
     {
       "format": "CSV",
       "size_mb": 146.52,
-      "write_s": 20.88,
-      "read_s": 4.52,
+      "write_s": 19.8,
+      "read_s": 4.48,
       "types_preserved": "no (27 of 29 columns changed type)"
     },
     {
       "format": "JSON (records, one per line)",
       "size_mb": 485.02,
-      "write_s": 12.95,
-      "read_s": 18.76,
+      "write_s": 32.52,
+      "read_s": 19.51,
       "types_preserved": "no (27 of 29 columns changed type)"
     },
     {
       "format": "Parquet (snappy)",
       "size_mb": 9.16,
-      "write_s": 1.86,
-      "read_s": 0.25,
+      "write_s": 1.27,
+      "read_s": 0.13,
       "types_preserved": "yes"
     }
   ],
@@ -31,10 +31,10 @@
     "partition_column": "region_code",
     "region_code": 13,
     "rows_all": 650424,
-    "seconds_all": 0.118,
+    "seconds_all": 0.089,
     "files_all": 17,
     "rows_one_region": 80320,
-    "seconds_one_region": 0.017,
+    "seconds_one_region": 0.016,
     "files_one_region": 1
   }
 }
