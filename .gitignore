@@ -25,3 +25,6 @@ Thumbs.db
 # --- Generated reports: keep only the latest copy of each in Git ---
 outputs/validation/*
 !outputs/validation/*_latest.json
+
+# --- draw.io export scratch folder (docs/render_diagrams.py empties it) ---
+docs/diagrams/export/
