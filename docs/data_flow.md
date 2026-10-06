@@ -1,54 +1,8 @@
 # Data flow and lineage
 
-How each source file moves through the layers, and what happens to it at each step. Image file: [images/data_flow.png](images/data_flow.png).
+How each source file moves through the layers, and what happens to it at each step. Editable source: [diagrams/data_flow.drawio](diagrams/data_flow.drawio); to change it, open it at [app.diagrams.net](https://app.diagrams.net) (File → Open from → Device), save it back to the same place, then run `python docs/render_diagrams.py` to refresh the PNG.
 
-```mermaid
-flowchart TD
-    subgraph RAW["raw (unchanged)"]
-        R1["HOUSEHOLD.CSV<br/>177,656 rows"]
-        R2["RTF1.CSV<br/>177,656 rows"]
-        R3["MEMBER.CSV<br/>650,424 rows"]
-        R4["RTF2.CSV<br/>610,590 rows"]
-        R5["dictionary .xlsx<br/>value labels"]
-        R6["psgc/regions.json<br/>17 regions"]
-    end
-
-    subgraph STG["staging (Parquet, one per source)"]
-        S1[v1_household]
-        S2[v1_household_questions]
-        S3[v1_member]
-        S4[v1_literacy]
-        S5[codebook<br/>2,501 labels]
-    end
-
-    subgraph CUR["curated (Parquet + PostgreSQL)"]
-        C0[dim_region]
-        C1[household<br/>177,656]
-        C2[member<br/>650,424]
-        C3[literacy_assessment<br/>610,590]
-        C4[agg_literacy_digital<br/>408]
-        C5[person_profile<br/>650,424, partitioned by region]
-    end
-
-    R1 --> S1
-    R2 --> S2
-    R3 --> S3
-    R4 --> S4
-    R5 --> S5
-    R6 --> C0
-    S1 -->|"join on hhid (1:1)"| C1
-    S2 -->|"join on hhid (1:1)"| C1
-    S5 -.->|decode codes| C1
-    S3 --> C2
-    S5 -.->|decode codes| C2
-    S4 --> C3
-    S5 -.->|decode codes| C3
-    C2 -->|"hhid (many:1)"| C5
-    C1 --> C5
-    C3 -->|"hhid + line_no (1:1)"| C5
-    C0 --> C5
-    C5 -->|"weighted rates, persons 10-64"| C4
-```
+![Data flow: the six raw files, their staging tables, and the curated tables built from them](images/data_flow.png)
 
 ## What each layer is allowed to do
 

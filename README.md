@@ -79,19 +79,9 @@ PSA's catalog lists the 2024 public-use file as Volume 1 and Volume 2. We downlo
 
 ## 5. Architecture
 
-```mermaid
-flowchart LR
-    A["PSA FLEMMS CSV + XLSX"] --> R["raw/"]
-    B["PSGC API (JSON)"] --> R
-    R -->|clean, type, de-duplicate| S["staging/ (Parquet)"]
-    S -->|validate| C["curated/ (Parquet,<br/>partitioned by region)"]
-    C -->|validate| P[("PostgreSQL<br/>warehouse")]
-    P --> Q["SQL / analysis"]
-    AF["Airflow DAG"] -. orchestrates .- R
-    AF -. orchestrates .- P
-```
+![Architecture: two sources, Docker Compose running Airflow, the raw, staging and curated layers, the PostgreSQL warehouse, and how the data is used](docs/images/architecture_wide.png)
 
-Full diagram: [docs/images/architecture.png](docs/images/architecture.png). Details, component roles and design trade-offs: [docs/architecture.md](docs/architecture.md). Lineage and transformation rules: [docs/data_flow.md](docs/data_flow.md). Database diagram: [docs/erd.md](docs/erd.md).
+Tall version: [docs/images/architecture.png](docs/images/architecture.png). Details, component roles and design trade-offs: [docs/architecture.md](docs/architecture.md). Lineage and transformation rules: [docs/data_flow.md](docs/data_flow.md). Database diagram: [docs/erd.md](docs/erd.md).
 
 **Technology stack:** Python 3.12 (pandas 3, pyarrow), PostgreSQL 16, Apache Airflow 3.3.2, Docker Compose, pytest, Git/GitHub.
 
@@ -102,7 +92,8 @@ Full diagram: [docs/images/architecture.png](docs/images/architecture.png). Deta
 ├── dags/flemms_pipeline.py     # Airflow DAG
 ├── data/                       # raw / staging / curated layers (contents not committed)
 ├── docs/                       # architecture, data flow, ERD, data dictionary, data contract, sources
-│   └── images/                 # PNG versions of the diagrams (python docs/render_diagrams.py)
+│   ├── diagrams/               # editable draw.io sources of the diagrams
+│   └── images/                 # PNG exports of the diagrams (python docs/render_diagrams.py)
 ├── outputs/                    # generated reports: validation, profiling, de-dup, format benchmark
 ├── sql/                        # schema (DDL) and representative queries
 ├── src/

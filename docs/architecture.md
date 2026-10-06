@@ -2,46 +2,11 @@
 
 The diagram shows the system as implemented in this repository. Every box maps to a file or a Docker service.
 
-Image files for slides and the report: [images/architecture.png](images/architecture.png) (vertical) and [images/architecture_wide.png](images/architecture_wide.png) (wide). Regenerate them with `python docs/render_diagrams.py` after editing the diagram.
+There are two independent sources: the PSA FLEMMS 2024 public-use file (four CSV files and the XLSX data dictionary, all in one download) and the PSGC API (JSON).
 
-```mermaid
-flowchart TB
-    subgraph SRC["1. Sources"]
-        S1["PSA FLEMMS 2024<br/>4 CSV files"]
-        S1B["PSA data dictionary<br/>XLSX"]
-        S3["PSGC regions API<br/>REST / JSON"]
-    end
+Wide version for slides: [images/architecture_wide.png](images/architecture_wide.png). Editable sources: [diagrams/architecture.drawio](diagrams/architecture.drawio) and [diagrams/architecture_wide.drawio](diagrams/architecture_wide.drawio); to change one, open it at [app.diagrams.net](https://app.diagrams.net) (File → Open from → Device), save it back to the same place, then run `python docs/render_diagrams.py` to refresh the PNGs.
 
-    subgraph DOCKER["Docker Compose"]
-        AF["Apache Airflow 3.3<br/>DAG: flemms_digital_divide_pipeline<br/>monthly, retries, failure callback"]
-        META[("Airflow<br/>metadata DB")]
-        subgraph LAKE["2. File layers (data/)"]
-            RAW["raw<br/>files as received<br/>+ ingestion manifest"]
-            STG["staging<br/>typed, de-duplicated<br/>Parquet + codebook"]
-            CUR["curated<br/>joined tables (Parquet)<br/>person table partitioned by region"]
-        end
-        PG[("3. PostgreSQL 16 warehouse<br/>5 tables + audit table + view")]
-    end
-
-    subgraph USE["4. Consumption"]
-        SQL["SQL queries"]
-        NB["Analysis / dashboard"]
-        REP["Reports: validation,<br/>profiling, format benchmark"]
-    end
-
-    S1 -->|ingest| RAW
-    S1B -->|ingest| RAW
-    S3 -->|fetch with retries| RAW
-    RAW -->|clean + de-duplicate| STG
-    STG -->|"validate (data contract), join"| CUR
-    CUR -->|"validate (data contract), load"| PG
-    PG --> SQL
-    PG --> NB
-    CUR --> NB
-    LAKE --> REP
-    AF -.->|runs every step| LAKE
-    AF --- META
-```
+![Architecture: two sources, Docker Compose running Airflow, the raw, staging and curated layers, the PostgreSQL warehouse, and how the data is used](images/architecture.png)
 
 ## Components and why they were chosen
 

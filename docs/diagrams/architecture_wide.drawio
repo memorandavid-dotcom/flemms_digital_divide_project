@@ -1,0 +1,110 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="architecture-wide" name="Architecture (wide)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1640" pageHeight="740" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="src" value="1. Sources&lt;br&gt;(2 sources, 3 formats)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="15" y="150" width="230" height="400" />
+        </mxCell>
+        <mxCell id="src1" value="&lt;b&gt;Source 1: PSA FLEMMS 2024&lt;/b&gt;&lt;br&gt;public-use file, one download" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;arcSize=4;" vertex="1" parent="src">
+          <mxGeometry as="geometry" x="10" y="50" width="210" height="205" />
+        </mxCell>
+        <mxCell id="s1" value="Survey data&lt;br&gt;4 CSV files" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="src1">
+          <mxGeometry as="geometry" x="15" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="s1b" value="Data dictionary&lt;br&gt;XLSX" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="src1">
+          <mxGeometry as="geometry" x="15" y="125" width="180" height="60" />
+        </mxCell>
+        <mxCell id="src2" value="&lt;b&gt;Source 2: PSGC API&lt;/b&gt;&lt;br&gt;fetched on every run" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=8;spacingTop=4;arcSize=4;" vertex="1" parent="src">
+          <mxGeometry as="geometry" x="10" y="270" width="210" height="115" />
+        </mxCell>
+        <mxCell id="s3" value="Region list&lt;br&gt;REST API / JSON" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="src2">
+          <mxGeometry as="geometry" x="15" y="40" width="180" height="60" />
+        </mxCell>
+        <mxCell id="docker" value="Docker Compose" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="290" y="40" width="1070" height="660" />
+        </mxCell>
+        <mxCell id="af" value="&lt;b&gt;Apache Airflow 3.3&lt;/b&gt;&lt;br&gt;DAG: flemms_digital_divide_pipeline&lt;br&gt;runs every step · monthly · retries · failure callback" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="docker">
+          <mxGeometry as="geometry" x="20" y="40" width="700" height="60" />
+        </mxCell>
+        <mxCell id="meta" value="Airflow metadata DB&lt;br&gt;(PostgreSQL 16)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;" vertex="1" parent="docker">
+          <mxGeometry as="geometry" x="770" y="30" width="180" height="80" />
+        </mxCell>
+        <mxCell id="lake" value="2. File layers (data/)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="docker">
+          <mxGeometry as="geometry" x="20" y="160" width="780" height="400" />
+        </mxCell>
+        <mxCell id="raw" value="&lt;b&gt;raw&lt;/b&gt;&lt;br&gt;&lt;br&gt;files exactly as received&lt;br&gt;+ ingestion manifest" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lake">
+          <mxGeometry as="geometry" x="30" y="30" width="160" height="340" />
+        </mxCell>
+        <mxCell id="stg" value="&lt;b&gt;staging&lt;/b&gt;&lt;br&gt;&lt;br&gt;typed, de-duplicated&lt;br&gt;Parquet + codebook" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lake">
+          <mxGeometry as="geometry" x="310" y="30" width="160" height="340" />
+        </mxCell>
+        <mxCell id="cur" value="&lt;b&gt;curated&lt;/b&gt;&lt;br&gt;&lt;br&gt;joined tables (Parquet)&lt;br&gt;partitioned by region" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lake">
+          <mxGeometry as="geometry" x="590" y="30" width="160" height="340" />
+        </mxCell>
+        <mxCell id="pg" value="&lt;b&gt;3. PostgreSQL 16&lt;br&gt;warehouse&lt;/b&gt;&lt;br&gt;5 tables + audit&lt;br&gt;table + view" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;" vertex="1" parent="docker">
+          <mxGeometry as="geometry" x="860" y="270" width="180" height="180" />
+        </mxCell>
+        <mxCell id="use" value="4. Consumption" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1390" y="200" width="230" height="400" />
+        </mxCell>
+        <mxCell id="rep" value="Reports: validation,&lt;br&gt;profiling, format&lt;br&gt;benchmark" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
+          <mxGeometry as="geometry" x="15" y="30" width="200" height="80" />
+        </mxCell>
+        <mxCell id="sql" value="SQL queries" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
+          <mxGeometry as="geometry" x="15" y="160" width="200" height="70" />
+        </mxCell>
+        <mxCell id="nb" value="Analysis / dashboard" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
+          <mxGeometry as="geometry" x="15" y="290" width="200" height="70" />
+        </mxCell>
+        <mxCell id="e1" value="ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.147;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1" target="raw">
+          <mxGeometry as="geometry" relative="1" x="-0.2" />
+        </mxCell>
+        <mxCell id="e2" value="ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.368;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1b" target="raw">
+          <mxGeometry as="geometry" relative="1" x="-0.2" />
+        </mxCell>
+        <mxCell id="e3" value="API fetch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.765;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="raw">
+          <mxGeometry as="geometry" relative="1" x="-0.2" />
+        </mxCell>
+        <mxCell id="e5" value="clean +&lt;br&gt;de-duplicate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="raw" target="stg">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="validate (data&lt;br&gt;contract) + join" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="stg" target="cur">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="validate +&lt;br&gt;load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cur" target="pg">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="runs every step" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.449;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="af" target="lake">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;endArrow=none;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="af" target="meta">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.175;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="lake" target="rep">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.472;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pg" target="sql">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.944;exitY=0.833;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pg" target="nb">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1365" y="460" />
+              <mxPoint x="1365" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=1.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cur" target="nb">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="980" y="650" />
+              <mxPoint x="1505" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

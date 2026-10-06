@@ -1,0 +1,158 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="data-flow" name="Data flow">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="raw" value="raw (unchanged)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="30" width="1260" height="130" />
+        </mxCell>
+        <mxCell id="r1" value="HOUSEHOLD.CSV&lt;br&gt;177,656 rows" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="20" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="r2" value="RTF1.CSV&lt;br&gt;177,656 rows" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="225" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="r3" value="MEMBER.CSV&lt;br&gt;650,424 rows" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="430" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="r4" value="RTF2.CSV&lt;br&gt;610,590 rows" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="635" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="r5" value="dictionary .xlsx&lt;br&gt;value labels" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="840" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="r6" value="psgc/regions.json&lt;br&gt;17 regions" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
+          <mxGeometry as="geometry" x="1045" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="stg" value="staging (Parquet, one table per source)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="230" width="1055" height="130" />
+        </mxCell>
+        <mxCell id="t1" value="v1_household" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">
+          <mxGeometry as="geometry" x="20" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="t2" value="v1_household_questions" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">
+          <mxGeometry as="geometry" x="225" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="t3" value="v1_member" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">
+          <mxGeometry as="geometry" x="430" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="t4" value="v1_literacy" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">
+          <mxGeometry as="geometry" x="635" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="t5" value="codebook&lt;br&gt;2,501 labels" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">
+          <mxGeometry as="geometry" x="840" y="50" width="180" height="60" />
+        </mxCell>
+        <mxCell id="cur" value="curated (Parquet + PostgreSQL)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="20" y="440" width="1260" height="620" />
+        </mxCell>
+        <mxCell id="c1" value="household&lt;br&gt;177,656" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="152" y="60" width="180" height="60" />
+        </mxCell>
+        <mxCell id="c2" value="member&lt;br&gt;650,424" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="430" y="60" width="180" height="60" />
+        </mxCell>
+        <mxCell id="c3" value="literacy_assessment&lt;br&gt;610,590" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="635" y="60" width="180" height="60" />
+        </mxCell>
+        <mxCell id="c0" value="dim_region&lt;br&gt;17" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="1045" y="60" width="180" height="60" />
+        </mxCell>
+        <mxCell id="c5" value="person_profile&lt;br&gt;650,424, partitioned by region" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="450" y="260" width="260" height="70" />
+        </mxCell>
+        <mxCell id="c4" value="agg_literacy_digital&lt;br&gt;408" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="cur">
+          <mxGeometry as="geometry" x="490" y="460" width="180" height="60" />
+        </mxCell>
+        <mxCell id="rs1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r1" target="t1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="rs2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r2" target="t2">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="rs3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r3" target="t3">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="rs4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r4" target="t4">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="rs5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r5" target="t5">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="r6c0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r6" target="c0">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="t1c1" value="join on hhid (1:1)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.378;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t1" target="c1">
+          <mxGeometry as="geometry" relative="1" x="-0.7">
+            <Array as="points">
+              <mxPoint x="130" y="410" />
+              <mxPoint x="240" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t2c1" value="join on hhid (1:1)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.628;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t2" target="c1">
+          <mxGeometry as="geometry" relative="1" x="-0.7">
+            <Array as="points">
+              <mxPoint x="335" y="410" />
+              <mxPoint x="285" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t3" target="c2">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="t4c3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t4" target="c3">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="dec1" value="decode codes (PSA labels)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.878;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t5" target="c1">
+          <mxGeometry as="geometry" relative="1" x="-0.85">
+            <Array as="points">
+              <mxPoint x="950" y="470" />
+              <mxPoint x="330" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dec2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.833;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t5" target="c2">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="950" y="470" />
+              <mxPoint x="600" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dec3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.806;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="t5" target="c3">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="950" y="470" />
+              <mxPoint x="800" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c1c5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.115;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c1" target="c5">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="262" y="650" />
+              <mxPoint x="500" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c2c5" value="hhid (many:1)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.611;exitY=1.0;exitDx=0;exitDy=0;entryX=0.346;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c2" target="c5">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="c3c5" value="hhid + line_no (1:1)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.25;exitY=1.0;exitDx=0;exitDy=0;entryX=0.885;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c3" target="c5">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="c0c5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c0" target="c5">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1155" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c5c4" value="weighted rates, persons 10-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c5" target="c4">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
