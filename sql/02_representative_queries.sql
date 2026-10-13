@@ -26,10 +26,14 @@ FROM literacy_assessment
 WHERE functional_literate IS NOT NULL;
 
 -- 3. Functional literacy by household digital access tier
+--    persons_sampled = unweighted n; use it to judge estimate stability.
 SELECT h.digital_access_tier,
        count(*) AS persons_sampled,
        round(100 * sum(l.respondent_weight) FILTER (WHERE l.functional_literate)
-             / sum(l.respondent_weight), 1) AS functional_literacy_rate_pct
+             / sum(l.respondent_weight), 1) AS functional_literacy_rate_pct,
+       -- Note: design-aware std errors not available from PUF; treat rates as
+       -- directional associations, not precise rankings. Small-n cells unstable.
+       '(no design SE available)' AS uncertainty_note
 FROM literacy_assessment l
 JOIN household h USING (survey_year, hhid)
 WHERE l.functional_literate IS NOT NULL
@@ -37,20 +41,27 @@ GROUP BY h.digital_access_tier
 ORDER BY min(h.digital_access_score);
 
 -- 4. Digital divide by region: home internet access vs functional literacy
+--    n_households and n_persons = unweighted sample sizes for stability assessment.
 WITH access AS (
     SELECT region_code,
+           count(*) AS n_households,
            round(100 * sum(household_weight) FILTER (WHERE has_home_internet) / sum(household_weight), 1)
                AS households_with_home_internet_pct
     FROM household GROUP BY region_code
 ), literacy AS (
     SELECT h.region_code,
+           count(*) AS n_persons,
            round(100 * sum(l.respondent_weight) FILTER (WHERE l.functional_literate)
                  / sum(l.respondent_weight), 1) AS functional_literacy_rate_pct
     FROM literacy_assessment l JOIN household h USING (survey_year, hhid)
     WHERE l.functional_literate IS NOT NULL
     GROUP BY h.region_code
 )
-SELECT r.region_name, a.households_with_home_internet_pct, lt.functional_literacy_rate_pct
+SELECT r.region_name,
+       a.n_households,
+       a.households_with_home_internet_pct,
+       lt.n_persons,
+       lt.functional_literacy_rate_pct
 FROM dim_region r
 JOIN access a USING (region_code)
 JOIN literacy lt USING (region_code)
@@ -84,7 +95,9 @@ GROUP BY m.education_level_code, m.education_level
 ORDER BY m.education_level_code NULLS FIRST;
 
 -- 7. Urban vs rural
+--    n = unweighted persons sampled in each urbanity category.
 SELECT h.urbanity,
+       count(*) AS n_persons,
        round(100 * sum(l.respondent_weight) FILTER (WHERE h.has_home_internet) / sum(l.respondent_weight), 1)
            AS living_with_home_internet_pct,
        round(100 * sum(l.respondent_weight) FILTER (WHERE l.functional_literate) / sum(l.respondent_weight), 1)

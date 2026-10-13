@@ -44,12 +44,14 @@ The PSA publishes FLEMMS as raw, coded microdata spread over several files, with
 
 Survey-weighted, persons 10-64 (from `sql/02_representative_queries.sql`):
 
-| Household digital access tier | Functional literacy rate |
-|---|---:|
-| No access | 53.6% |
-| Low | 68.3% |
-| Moderate | 77.4% |
-| High | 83.0% |
+| Household digital access tier | Weighted literacy rate | Unweighted n (persons) |
+|---|---:|---:|
+| No access | 53.6% | ~23,000 |
+| Low | 68.3% | ~153,000 |
+| Moderate | 77.4% | ~113,000 |
+| High | 83.0% | ~68,000 |
+
+> **Uncertainty note:** these are weighted point estimates from a complex multi-stage probability sample. Design-aware standard errors (using PSU clusters) are not computable from the public-use file, which does not release replicate weights or PSU–stratum pairs at the individual record level. Treat the differences between tiers as directionally reliable but do not rank them as precise policy thresholds — the unweighted *n* column shows where small cells make estimates less stable. The appropriate interpretation is that higher digital access is *associated* with higher literacy, not that it causes it.
 
 - National figures reproduce PSA's published 2024 results exactly, which confirms the joins and survey weights are applied correctly ([PSA press release](https://psa.gov.ph/content/every-10-filipinos-9-have-basic-literacy-while-7-have-functional-literacy)):
 
@@ -230,12 +232,15 @@ docker compose down -v     # stop and delete both databases
 ## 8. The Airflow DAG
 
 ```text
-ingest_survey_files ──> profile_raw_sources
+ingest_survey_files ──> profile_raw_sources  (parallel; never blocks staging)
         │
         v
+validate_raw_gate  <── fail-fast: file presence, schema, checksums,
+        │              row counts, basic constraint spot-check
+        v
 build_staging ──> validate_staging ──> build_curated ──> validate_curated ──> load_warehouse
-                                            ^                      └──────> benchmark_file_formats
-fetch_region_codes ─────────────────────────┘
+                                            ^                      ├──────> benchmark_file_formats
+fetch_region_codes ─────────────────────────┘                     └──────> generate_charts
 ```
 
 | Setting | Value | Why |
@@ -248,16 +253,20 @@ fetch_region_codes ────────────────────�
 | Parameter `run_format_benchmark` | true/false | Skip the slow benchmark when not needed |
 
 **Diagnosing a failure:** in the Airflow UI open the run, click the red task, open **Logs**. Logs are also on disk under `logs/dag_id=flemms_digital_divide_pipeline/`. Validation failures name the table, check, column and count, e.g.
-`DataQualityError: 1 data-quality check(s) failed in 'staging': v1_household.row_count(*): 177,656 rows (minimum 10,000,000)`.
+`DataQualityError: 1 raw-gate check(s) failed: v1_household.row_count(*): 80,000 rows (minimum 100,000)` — a realistic failure if a source file was truncated during download (the actual 177,656-row household file easily exceeds the 100,000-row minimum and would pass).
 The full list of checks for the last run is in `outputs/validation/<stage>_latest.json`.
 
 ## 9. Data quality and validation
 
-Rules live in [docs/data_contract.yaml](docs/data_contract.yaml); `src/validation/checks.py` enforces them after staging (117 checks) and after curation (177 checks). Ten check types:
+Rules live in [docs/data_contract.yaml](docs/data_contract.yaml); `src/validation/raw_gate.py` enforces a **fail-fast gate before staging** (file presence, schema, checksums, row counts, constraint spot-checks) and `src/validation/checks.py` enforces detailed rules after staging (117 checks) and after curation (177 checks). Ten check types:
 
 | Check | Example |
 |---|---|
-| row_count | `household` has at least 100,000 rows |
+| file_presence | all four CSV files exist and are non-empty (raw gate) |
+| schema | every required raw column is in the CSV header (raw gate) |
+| checksum | SHA-256 matches last ingested manifest — drift logged as warning (raw gate) |
+| row_count | `household` has at least 100,000 rows (raw gate + staging + curated) |
+| constraints | HHID not blank, RFACT positive — checked on a 5,000-row sample (raw gate) |
 | required_columns (schema) | every contracted column exists |
 | dtype | `age` is an integer, `has_home_internet` is boolean |
 | not_null | `hhid`, weights, `sex` never missing |
@@ -306,6 +315,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 | Output | Location |
 |---|---|
 | Ingestion manifest (checksums, rows, encoding) | `data/raw/_manifests/latest.json` |
+| Raw-gate validation report | `outputs/validation/raw_gate_latest.json` |
 | Staged tables + codebook | `data/staging/*.parquet` |
 | Curated tables | `data/curated/*.parquet`, `data/curated/person_profile/region_code=*/` |
 | Warehouse tables and view | PostgreSQL `flemms` database |
@@ -314,6 +324,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 | Validation reports | `outputs/validation/staging_latest.json`, `curated_latest.json` |
 | Format comparison | `outputs/format_comparison.md` |
 | Aggregate for spreadsheets | `outputs/agg_literacy_digital.csv` |
+| Summary charts | `outputs/charts/functional_literacy_by_access_tier.png`, `home_internet_by_region.png`, `sample_sizes_region_tier.png` |
 
 ## 13. Assumptions and limitations
 
@@ -321,6 +332,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 - Digital access in the FLEMMS 2024 public-use file is measured per **household**, so every member of a household gets the same access tier. Individual-level data (FLEMMS Form 3) would allow individual digital measures.
 - The digital access score and tiers are our own business rule (documented in `config/pipeline.yaml` and `docs/data_flow.md`), not a PSA indicator.
 - Public-use files stop at province level; regional estimates follow the survey design, smaller areas are not reliable.
+- **Survey weights and uncertainty:** weighted rates correct for unequal sampling probabilities. However, design-aware standard errors (accounting for PSU clustering and stratification) cannot be computed from the public-use file because it does not release replicate weights or the PSU–stratum pair needed for linearisation. The `persons_sampled` column in `agg_literacy_digital` shows unweighted cell sizes; cells with fewer than ~50 persons should be treated as indicative only.
 - Rates in `agg_literacy_digital` cells with few sampled persons are unstable.
 - The PSGC API snapshot has no Negros Island Region yet, so analysis uses `REG` (17 regions); `REG2` is kept.
 - Results show association, not causation.
@@ -343,7 +355,7 @@ ncr = read_person_profile(region_code=13)   # reads only data/curated/person_pro
 - Add individual-level internet use and digital skills (FLEMMS Form 3) if PSA releases them.
 - Add earlier FLEMMS rounds (2019) to compare trends; the `survey_year` keys already allow it.
 - Include the Negros Island Region once the PSGC API publishes it.
-- Report standard errors / confidence intervals using the PSU design variables.
+- Obtain replicate weights or PSU–stratum pair from PSA to compute design-aware standard errors.
 - A dashboard on top of `agg_literacy_digital`.
 - Continuous integration (run `pytest` on every push).
 

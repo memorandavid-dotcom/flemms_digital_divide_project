@@ -28,11 +28,13 @@ def _stage(module: str, func: str):
 STAGES = {
     "fetch_regions": _stage("src.extract.fetch_psgc", "fetch_regions"),
     "ingest": _stage("src.extract.ingest_survey", "ingest_survey_files"),
+    "validate_raw": _stage("src.validation.raw_gate", "validate_raw"),
     "profile": _stage("src.analysis.profiling", "profile_sources"),
     "staging": _stage("src.transform.staging", "build_staging"),
     "validate_staging": _stage("src.validation.layers", "validate_staging"),
     "curated": _stage("src.transform.curated", "build_curated"),
     "validate_curated": _stage("src.validation.layers", "validate_curated"),
+    "generate_charts": _stage("src.analysis.charts", "generate_charts"),
     "load": _stage("src.load.warehouse", "load_warehouse"),
     "benchmark": _stage("src.analysis.format_benchmark", "benchmark_formats"),
 }
