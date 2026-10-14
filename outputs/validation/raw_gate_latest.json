@@ -1,0 +1,244 @@
+{
+  "stage": "raw_gate",
+  "batch_id": "manual__2026-10-14T09:06:01.362592+00:00",
+  "run_at": "2026-10-14T09:07:38+00:00",
+  "checks_run": 26,
+  "checks_failed": 0,
+  "warnings": 0,
+  "results": [
+    {
+      "table": "v1_household",
+      "check": "file_presence",
+      "target": "FLEMMS PUF 2024 Volume1 - HOUSEHOLD.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "found, 8,172,220 bytes",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household",
+      "check": "checksum",
+      "target": "FLEMMS PUF 2024 Volume1 - HOUSEHOLD.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "matches the SHA-256 recorded at ingestion",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household",
+      "check": "schema",
+      "target": "HHID,REG,REG2,PRV,URBANITY,PSU,INTVW,RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 8 required columns present",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "177,656 data rows (minimum 100,000)",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household",
+      "check": "key_not_blank",
+      "target": "HHID",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household",
+      "check": "weight",
+      "target": "RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all rows positive",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "file_presence",
+      "target": "FLEMMS PUF 2024 Volume1 - RTF1.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "found, 27,537,272 bytes",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "checksum",
+      "target": "FLEMMS PUF 2024 Volume1 - RTF1.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "matches the SHA-256 recorded at ingestion",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "schema",
+      "target": "HHID,BENEFICIARY_4PS,ELECTRICITY,HH_SMARTPHONE,HH_BASICPHONE,HH_PC,HH_TABLET,HH_CABNET,HH_NOCABNET,HH_MOBSUB,ICT_EQUIP,HH_RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 12 required columns present",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "177,656 data rows (minimum 100,000)",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "key_not_blank",
+      "target": "HHID",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_household_questions",
+      "check": "weight",
+      "target": "HH_RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all rows positive",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "file_presence",
+      "target": "FLEMMS PUF 2024 Volume1 - MEMBER.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "found, 92,360,631 bytes",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "checksum",
+      "target": "FLEMMS PUF 2024 Volume1 - MEMBER.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "matches the SHA-256 recorded at ingestion",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "schema",
+      "target": "HHID,LNO,SEX,AGE,HGC_LEVEL,ATTEND_SCHOOL,MEM_RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 7 required columns present",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "650,424 data rows (minimum 300,000)",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "key_not_blank",
+      "target": "HHID",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "key_not_blank",
+      "target": "LNO",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_member",
+      "check": "weight",
+      "target": "MEM_RFACT",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all rows positive",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "file_presence",
+      "target": "FLEMMS PUF 2024 Volume1 - RTF2.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "found, 56,174,534 bytes",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "checksum",
+      "target": "FLEMMS PUF 2024 Volume1 - RTF2.CSV",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "matches the SHA-256 recorded at ingestion",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "schema",
+      "target": "HHID,LNO_F2,RESULT_CODE_F2,AGE_F2,BLITERATE,FLITERATE,FLLEVEL,RESP_RFACT_F2",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "all 8 required columns present",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "row_count",
+      "target": "*",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "610,590 data rows (minimum 300,000)",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "key_not_blank",
+      "target": "HHID",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "key_not_blank",
+      "target": "LNO_F2",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "every value is a whole number",
+      "severity": "error"
+    },
+    {
+      "table": "v1_literacy",
+      "check": "weight",
+      "target": "RESP_RFACT_F2",
+      "passed": true,
+      "failing_rows": 0,
+      "detail": "positive on all 572,475 rows where RESULT_CODE_F2 = 1, 0 on the other 38,115",
+      "severity": "error"
+    }
+  ]
+}
