@@ -70,6 +70,7 @@ Functional literacy, persons 10-64, survey-weighted, with 95% confidence interva
   ![Home internet access by region, with 95% confidence intervals](outputs/charts/home_internet_by_region.png)
 
 - Every region × tier cell rests on at least 558 people ([sample-size heat-map](outputs/charts/sample_sizes_region_tier.png)); the full table of estimates, standard errors, intervals and design effects is in `outputs/analysis/key_estimates.csv`.
+- What these results mean, with their uncertainty: [docs/findings.md](docs/findings.md)
 - People in urban areas are far more likely to live with home internet (44.3%) than in rural areas (25.5%); functional literacy is 74.4% vs 66.3%.
 - Both digital access and literacy rise with education level.
 
