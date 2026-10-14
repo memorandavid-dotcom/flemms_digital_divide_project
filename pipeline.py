@@ -34,9 +34,10 @@ STAGES = {
     "validate_staging": _stage("src.validation.layers", "validate_staging"),
     "curated": _stage("src.transform.curated", "build_curated"),
     "validate_curated": _stage("src.validation.layers", "validate_curated"),
-    "generate_charts": _stage("src.analysis.charts", "generate_charts"),
     "load": _stage("src.load.warehouse", "load_warehouse"),
     "benchmark": _stage("src.analysis.format_benchmark", "benchmark_formats"),
+    "estimates": _stage("src.analysis.estimates", "estimate_key_indicators"),
+    "charts": _stage("src.analysis.charts", "generate_charts"),
 }
 
 

@@ -1,15 +1,18 @@
 """Airflow DAG: FLEMMS 2024 digital divide pipeline.
 
-    ingest_survey_files --> profile_raw_sources
-            |                      (parallel)
+    ingest_survey_files --> profile_raw_sources   (report only, runs in parallel)
+            |
             v
-    validate_raw_gate  <-- fail-fast: file presence, schema, checksums,
-            |              row counts, constraint spot-check BEFORE staging
+    validate_raw_gate   <-- fail-fast gate: file presence, checksums, schema,
+            |               row counts, keys and survey weights, BEFORE staging
             v
     build_staging --> validate_staging --> build_curated --> validate_curated --> load_warehouse
                                                ^                     |
     fetch_region_codes ------------------------+                     +--> benchmark_file_formats
-                                                                     +--> generate_charts
+                                                                     +--> estimate_key_indicators --> generate_charts
+
+Data quality is checked at three gates (raw, staging, curated), all driven by
+docs/data_contract.yaml; a failed gate stops every task after it.
 
 Each task calls a function in src/, the same code that pipeline.py runs from a
 terminal. Tasks pass data through the data/ layers (files), not through XCom;
@@ -48,7 +51,7 @@ default_args = {
 
 @dag(
     dag_id="flemms_digital_divide_pipeline",
-    description="FLEMMS 2024 Vol 1 + Vol 2 + PSGC regions -> raw -> staging -> curated -> PostgreSQL",
+    description="FLEMMS 2024 + PSGC regions -> raw -> staging -> curated -> PostgreSQL",
     schedule="@monthly",  # re-checks sources monthly; reruns are idempotent
     start_date=datetime(2026, 10, 1),
     catchup=False,
@@ -80,12 +83,12 @@ def flemms_digital_divide_pipeline():
 
     @task
     def validate_raw_gate(**context) -> int:
-        """Fail-fast gate: file presence, schema, checksums, row counts, constraints.
+        """Fail-fast gate: file presence, checksums, schema, row counts, keys, survey weights.
 
         Runs after ingestion (so the manifest exists) and before staging, so that
         build_staging never starts on missing, truncated or schema-broken raw files.
-        Raises AirflowFailException on any error-severity failure; warnings are
-        logged and reported but do not block the pipeline.
+        Rules come from raw_files in docs/data_contract.yaml; a failed check raises
+        AirflowFailException, which fails at once without retrying.
         """
         from src.validation.checks import DataQualityError
         from src.validation.raw_gate import validate_raw
@@ -128,6 +131,12 @@ def flemms_digital_divide_pipeline():
         return run(context["run_id"])
 
     @task
+    def estimate_key_indicators(**context) -> dict:
+        """Headline rates with 95% confidence intervals and sample sizes (outputs/analysis/)."""
+        from src.analysis.estimates import estimate_key_indicators as run
+        return run(context["run_id"])
+
+    @task
     def generate_charts(**context) -> list:
         """Generate PNG summary charts for the demo and README.
 
@@ -160,7 +169,9 @@ def flemms_digital_divide_pipeline():
     raw_gate >> staged
     staged >> validate_staging() >> curated
     regions >> curated
-    curated >> checked_curated >> [load_warehouse(), benchmark_file_formats(), generate_charts()]
+    estimates = estimate_key_indicators()
+    curated >> checked_curated >> [load_warehouse(), benchmark_file_formats(), estimates]
+    estimates >> generate_charts()
 
 
 flemms_digital_divide_pipeline()
