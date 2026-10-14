@@ -98,7 +98,7 @@ def estimate_key_indicators(batch_id: str) -> dict:
 
     table = pd.concat(frames, ignore_index=True)
     for column in ["weighted_pct", "se_pct", "ci95_low", "ci95_high"]:
-        table[column] = table[column].round(2)
+        table[column] = table[column].round(3)
     table["design_effect"] = table["design_effect"].round(2)
     table["batch_id"] = batch_id
 

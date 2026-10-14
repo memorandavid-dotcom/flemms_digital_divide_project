@@ -1,42 +1,42 @@
 indicator,breakdown,group,unweighted_n,weighted_pct,se_pct,ci95_low,ci95_high,design_effect,batch_id
-Functional literacy (persons 10-64),National,All,468643,70.79,0.28,70.24,71.33,17.46,manual__2026-10-14T09:06:01.362592+00:00
-Basic literacy (persons 10-64),National,All,468643,93.11,0.12,92.88,93.35,10.65,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Digital access tier,No access,44460,53.56,0.77,52.05,55.07,10.6,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Digital access tier,Low,291119,68.26,0.31,67.66,68.86,12.61,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Digital access tier,Moderate,72422,77.38,0.41,76.58,78.17,6.81,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Digital access tier,High,60642,82.96,0.43,82.13,83.8,7.77,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,CAR,24176,81.17,0.8,79.6,82.74,10.17,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,NCR,57682,79.88,0.7,78.5,81.25,17.67,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,CALABARZON,23659,77.29,0.87,75.59,78.99,10.14,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Central Luzon,38510,73.01,0.9,71.24,74.77,15.84,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,MIMAROPA Region,24547,70.69,1.02,68.68,72.7,12.44,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Northern Mindanao,28349,69.99,1.17,67.7,72.29,18.51,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Cagayan Valley,17501,69.37,1.19,67.05,71.69,11.57,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Central Visayas,28390,68.28,1.3,65.73,70.83,22.22,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Western Visayas,30999,67.61,0.98,65.68,69.53,13.69,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Bicol Region,25738,67.01,0.87,65.3,68.72,8.88,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Davao Region,24711,66.69,1.02,64.69,68.68,11.52,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,SOCCSKSARGEN,20918,65.82,1.13,63.61,68.04,11.83,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,BARMM,32505,64.71,1.41,61.94,67.49,28.5,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Ilocos Region,17102,64.26,1.36,61.6,66.93,13.76,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Caraga,24689,63.15,0.99,61.2,65.1,10.49,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Eastern Visayas,29937,61.83,0.91,60.05,63.6,10.41,manual__2026-10-14T09:06:01.362592+00:00
-Functional literacy (persons 10-64),Region,Zamboanga Peninsula,19230,59.34,1.33,56.73,61.95,14.11,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,National,All,177656,33.05,0.34,32.39,33.71,9.07,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,NCR,23217,53.07,0.69,51.72,54.43,4.46,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,CALABARZON,9230,44.56,1.27,42.08,47.05,6.01,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Central Luzon,14269,42.23,0.97,40.33,44.13,5.51,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Cagayan Valley,7075,35.32,1.35,32.67,37.96,5.63,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Ilocos Region,6531,33.45,1.13,31.23,35.67,3.78,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,CAR,9989,30.38,1.39,27.66,33.11,9.12,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Bicol Region,9129,27.14,1.8,23.62,30.67,14.94,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Central Visayas,10261,26.33,1.39,23.6,29.05,10.23,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Davao Region,9805,25.47,1.07,23.37,27.58,5.94,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Caraga,8681,23.87,0.9,22.1,25.64,3.91,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,SOCCSKSARGEN,7872,23.67,1.04,21.62,25.72,4.75,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Western Visayas,11682,23.42,0.95,21.55,25.29,5.93,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Eastern Visayas,10940,22.89,1.0,20.93,24.85,6.19,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Northern Mindanao,10616,22.47,0.94,20.63,24.31,5.37,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,MIMAROPA Region,9320,16.73,0.89,14.99,18.47,5.29,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,Zamboanga Peninsula,7093,14.64,0.78,13.11,16.17,3.48,manual__2026-10-14T09:06:01.362592+00:00
-Households with home internet,Region,BARMM,11946,6.34,0.62,5.12,7.56,7.77,manual__2026-10-14T09:06:01.362592+00:00
+Functional literacy (persons 10-64),National,All,468643,70.787,0.278,70.243,71.331,17.46,cli_20261014T091339Z
+Basic literacy (persons 10-64),National,All,468643,93.113,0.121,92.876,93.349,10.65,cli_20261014T091339Z
+Functional literacy (persons 10-64),Digital access tier,No access,44460,53.557,0.77,52.048,55.066,10.6,cli_20261014T091339Z
+Functional literacy (persons 10-64),Digital access tier,Low,291119,68.262,0.306,67.661,68.862,12.61,cli_20261014T091339Z
+Functional literacy (persons 10-64),Digital access tier,Moderate,72422,77.379,0.406,76.584,78.175,6.81,cli_20261014T091339Z
+Functional literacy (persons 10-64),Digital access tier,High,60642,82.964,0.425,82.13,83.798,7.77,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,CAR,24176,81.173,0.802,79.602,82.745,10.17,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,NCR,57682,79.876,0.702,78.501,81.252,17.67,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,CALABARZON,23659,77.285,0.867,75.586,78.985,10.14,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Central Luzon,38510,73.006,0.9,71.242,74.771,15.84,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,MIMAROPA Region,24547,70.687,1.025,68.679,72.695,12.44,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Northern Mindanao,28349,69.994,1.171,67.699,72.289,18.51,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Cagayan Valley,17501,69.37,1.185,67.047,71.693,11.57,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Central Visayas,28390,68.278,1.302,65.726,70.83,22.22,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Western Visayas,30999,67.607,0.984,65.679,69.535,13.69,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Bicol Region,25738,67.012,0.874,65.3,68.724,8.88,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Davao Region,24711,66.686,1.018,64.692,68.681,11.52,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,SOCCSKSARGEN,20918,65.824,1.128,63.613,68.036,11.83,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,BARMM,32505,64.713,1.415,61.94,67.486,28.5,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Ilocos Region,17102,64.265,1.359,61.6,66.929,13.76,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Caraga,24689,63.149,0.994,61.2,65.098,10.49,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Eastern Visayas,29937,61.828,0.906,60.052,63.603,10.41,cli_20261014T091339Z
+Functional literacy (persons 10-64),Region,Zamboanga Peninsula,19230,59.34,1.331,56.732,61.949,14.11,cli_20261014T091339Z
+Households with home internet,National,All,177656,33.048,0.336,32.389,33.706,9.07,cli_20261014T091339Z
+Households with home internet,Region,NCR,23217,53.072,0.692,51.716,54.427,4.46,cli_20261014T091339Z
+Households with home internet,Region,CALABARZON,9230,44.564,1.269,42.078,47.05,6.01,cli_20261014T091339Z
+Households with home internet,Region,Central Luzon,14269,42.229,0.971,40.327,44.132,5.51,cli_20261014T091339Z
+Households with home internet,Region,Cagayan Valley,7075,35.317,1.348,32.674,37.959,5.63,cli_20261014T091339Z
+Households with home internet,Region,Ilocos Region,6531,33.449,1.134,31.225,35.672,3.78,cli_20261014T091339Z
+Households with home internet,Region,CAR,9989,30.382,1.39,27.658,33.106,9.12,cli_20261014T091339Z
+Households with home internet,Region,Bicol Region,9129,27.144,1.799,23.618,30.671,14.94,cli_20261014T091339Z
+Households with home internet,Region,Central Visayas,10261,26.328,1.39,23.602,29.053,10.23,cli_20261014T091339Z
+Households with home internet,Region,Davao Region,9805,25.474,1.072,23.373,27.576,5.94,cli_20261014T091339Z
+Households with home internet,Region,Caraga,8681,23.87,0.904,22.097,25.643,3.91,cli_20261014T091339Z
+Households with home internet,Region,SOCCSKSARGEN,7872,23.669,1.044,21.622,25.716,4.75,cli_20261014T091339Z
+Households with home internet,Region,Western Visayas,11682,23.416,0.954,21.545,25.287,5.93,cli_20261014T091339Z
+Households with home internet,Region,Eastern Visayas,10940,22.89,0.999,20.931,24.848,6.19,cli_20261014T091339Z
+Households with home internet,Region,Northern Mindanao,10616,22.472,0.938,20.633,24.311,5.37,cli_20261014T091339Z
+Households with home internet,Region,MIMAROPA Region,9320,16.729,0.89,14.985,18.473,5.29,cli_20261014T091339Z
+Households with home internet,Region,Zamboanga Peninsula,7093,14.64,0.782,13.107,16.174,3.48,cli_20261014T091339Z
+Households with home internet,Region,BARMM,11946,6.34,0.621,5.122,7.558,7.77,cli_20261014T091339Z
