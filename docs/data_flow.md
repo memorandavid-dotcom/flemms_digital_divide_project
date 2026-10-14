@@ -8,7 +8,7 @@ How each source file moves through the layers, and what happens to it at each st
 
 | Layer | Allowed | Not allowed |
 |---|---|---|
-| **raw** | Store files exactly as downloaded / returned by the API; record checksum, size, rows, encoding, time (`data/raw/_manifests/`) | Any edit to the files |
+| **raw** | Store files exactly as downloaded / returned by the API; record checksum, size, rows, encoding, time (`data/raw/_manifests/`); check them at the **raw gate** (file presence, checksum, header, row count, keys, survey weights) before staging may start | Any edit to the files |
 | **staging** | Standardise column names (lower_snake_case, remove BOM); trim spaces; blank → missing; convert all-numeric columns to integer/decimal; remove exact duplicate rows and duplicate keys (rejected rows saved to `data/staging/_rejects/`); add lineage columns `source_file`, `source_line`, `batch_id`, `ingested_at`; parse the codebook | Joins, renaming to business names, derived fields |
 | **curated** | Joins across sources; business names; decode codes with the PSA codebook; derived fields and business rules (below); weighted aggregates; partitioning | Changing source values other than by the documented rules |
 

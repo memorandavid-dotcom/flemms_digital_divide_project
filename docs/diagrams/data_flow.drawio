@@ -25,7 +25,7 @@
         <mxCell id="r6" value="psgc/regions.json&lt;br&gt;17 regions" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="raw">
           <mxGeometry as="geometry" x="1045" y="50" width="180" height="60" />
         </mxCell>
-        <mxCell id="stg" value="staging (Parquet, one table per source)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
+        <mxCell id="stg" value="staging (Parquet, one table per source; built only after the raw gate passes)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="20" y="230" width="1055" height="130" />
         </mxCell>
         <mxCell id="t1" value="v1_household" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="stg">

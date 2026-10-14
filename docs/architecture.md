@@ -16,10 +16,11 @@ Wide version for slides: [images/architecture_wide.png](images/architecture_wide
 | **Raw / staging / curated folders** | Layered storage under `data/` | Raw keeps the source untouched for traceability; staging isolates per-file cleaning; curated holds integrated, analysis-ready tables. A bad step can be re-run from the layer before it. |
 | **Parquet** | Staging and curated storage | 16× smaller than CSV for the person table, about 20× faster to read, and it keeps column types (see `outputs/format_comparison.md`). |
 | **Partitioning by `region_code`** | `data/curated/person_profile/region_code=<n>/` | The research question compares regions, so analysts usually filter by region; reading one region touches 1 of 17 folders. |
-| **Data contract (YAML)** | `docs/data_contract.yaml`, enforced by `src/validation/checks.py` | One file is both the documentation and the rule set, so they cannot drift apart. |
+| **Data contract (YAML)** | `docs/data_contract.yaml`, enforced at three gates: raw files before staging (`src/validation/raw_gate.py`), then staging and curated tables (`src/validation/checks.py`) | One file is both the documentation and the rule set, so they cannot drift apart; checking the raw files first means staging never starts on a broken download. |
 | **PostgreSQL 16** | Warehouse for curated tables | Required by the course; primary/foreign keys and CHECK constraints give a second line of defence after Python validation; SQL is the easiest way for other consumers to query. |
 | **Apache Airflow 3.3** | Orchestration (`dags/flemms_pipeline.py`) | Dependencies, schedule, retries, parameters and per-task logs out of the box. LocalExecutor is enough for one machine and avoids Redis/Celery. |
 | **Docker Compose** | Runs Airflow, its metadata DB and the warehouse | Same versions on every laptop; one command to start (`docker compose up -d --build`). |
+| **Survey estimates (`src/analysis/estimates.py`)** | Headline rates with 95% confidence intervals and sample sizes | FLEMMS is a clustered, weighted sample; design-based intervals (Taylor linearization, PSUs as clusters) show which differences are real. |
 | **PSGC API** | Official region names | Replaces a hand-typed region mapping that had errors; retrieved automatically with retries and a cached fallback. |
 
 ## Design decisions and trade-offs
