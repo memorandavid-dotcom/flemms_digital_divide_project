@@ -46,7 +46,7 @@ Functional literacy, persons 10-64, survey-weighted, with 95% confidence interva
 
 | Household digital access tier | Weighted rate | 95% CI | Unweighted n (persons) |
 |---|---:|---:|---:|
-| No access | 53.6% | 52.1 – 55.1 | 44,460 |
+| No access | 53.6% | 52.0 – 55.1 | 44,460 |
 | Low | 68.3% | 67.7 – 68.9 | 291,119 |
 | Moderate | 77.4% | 76.6 – 78.2 | 72,422 |
 | High | 83.0% | 82.1 – 83.8 | 60,642 |
