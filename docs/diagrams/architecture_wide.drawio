@@ -49,7 +49,7 @@
         <mxCell id="use" value="4. Consumption" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;container=1;collapsible=0;verticalAlign=top;align=left;spacingLeft=10;spacingTop=2;fontStyle=1;arcSize=3;" vertex="1" parent="1">
           <mxGeometry as="geometry" x="1390" y="200" width="230" height="400" />
         </mxCell>
-        <mxCell id="rep" value="Reports: validation,&lt;br&gt;profiling, format&lt;br&gt;benchmark" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
+        <mxCell id="rep" value="Reports and charts:&lt;br&gt;validation, estimates&lt;br&gt;with 95% CIs, profiling" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
           <mxGeometry as="geometry" x="15" y="30" width="200" height="80" />
         </mxCell>
         <mxCell id="sql" value="SQL queries" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
@@ -67,7 +67,7 @@
         <mxCell id="e3" value="API fetch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.765;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="raw">
           <mxGeometry as="geometry" relative="1" x="-0.2" />
         </mxCell>
-        <mxCell id="e5" value="clean +&lt;br&gt;de-duplicate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="raw" target="stg">
+        <mxCell id="e5" value="raw gate +&lt;br&gt;clean +&lt;br&gt;de-duplicate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="raw" target="stg">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
         <mxCell id="e6" value="validate (data&lt;br&gt;contract) + join" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="stg" target="cur">

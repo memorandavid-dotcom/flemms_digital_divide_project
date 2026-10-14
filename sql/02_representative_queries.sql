@@ -27,13 +27,12 @@ WHERE functional_literate IS NOT NULL;
 
 -- 3. Functional literacy by household digital access tier
 --    persons_sampled = unweighted n; use it to judge estimate stability.
+--    95% confidence intervals for these rates (design-based, PSU clusters) are in
+--    outputs/analysis/key_estimates.csv, written by the estimate_key_indicators task.
 SELECT h.digital_access_tier,
        count(*) AS persons_sampled,
        round(100 * sum(l.respondent_weight) FILTER (WHERE l.functional_literate)
-             / sum(l.respondent_weight), 1) AS functional_literacy_rate_pct,
-       -- Note: design-aware std errors not available from PUF; treat rates as
-       -- directional associations, not precise rankings. Small-n cells unstable.
-       '(no design SE available)' AS uncertainty_note
+             / sum(l.respondent_weight), 1) AS functional_literacy_rate_pct
 FROM literacy_assessment l
 JOIN household h USING (survey_year, hhid)
 WHERE l.functional_literate IS NOT NULL

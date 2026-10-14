@@ -16,7 +16,7 @@ Everything needed to run the live demonstration: one-time laptop setup, the chec
 | A6 | Build and start (downloads about 1.5 GB the first time) | `docker compose up -d --build` | Command finishes |
 | A7 | Check health (wait 1-2 minutes) | `docker compose ps` | airflow-apiserver, airflow-scheduler, airflow-dag-processor, airflow-db, warehouse-db all show `healthy` |
 | A8 | Log in to Airflow | Open <http://localhost:8080>, user/password = `_AIRFLOW_WWW_USER_USERNAME` / `_AIRFLOW_WWW_USER_PASSWORD` from `.env` | DAG `flemms_digital_divide_pipeline` is listed |
-| A9 | **Full successful run** | In Airflow: switch the DAG on, press **Trigger**. Takes about 5-7 minutes | All 9 tasks green |
+| A9 | **Full successful run** | In Airflow: switch the DAG on, press **Trigger**. Takes about 5-7 minutes | All 12 tasks green |
 | A10 | **Create a failed run to show tomorrow** | Rename `data\raw\PHL-PSA-FLEMMS-2024-V1-PUF\FLEMMS PUF 2024 Volume1 - RTF2.CSV` to `RTF2.CSV.bak`, trigger the DAG, wait until `ingest_survey_files` turns red (about 4 minutes: it retries twice), then **rename the file back** | One red run in the history |
 | A11 | Second successful run (shows reruns don't duplicate) | Trigger again | Green; `pipeline_run` has 2 rows with the same member count |
 | A12 | Test the demo queries | `docker compose exec warehouse-db psql -U flemms -d flemms -f /sql/03_demo_queries.sql` | 5 result blocks; 70.8 appears in block 2 |
@@ -45,7 +45,7 @@ If you changed `WAREHOUSE_USER` or `WAREHOUSE_DB` in `.env`, use those instead o
 
 | Time | Show | Say (in your own words) |
 |---|---|---|
-| 0:00 | **Airflow → DAG → Graph** | "This is our pipeline in Airflow: 9 tasks. Ingestion of the PSA survey files and the PSGC region API, then staging, validation, curation, validation again, and loading into PostgreSQL. It is scheduled monthly, every task retries twice, and data-quality failures stop the pipeline immediately." |
+| 0:00 | **Airflow → DAG → Graph** | "This is our pipeline in Airflow: 12 tasks. Ingestion of the PSA survey files and the PSGC region API, then staging, validation, curation, validation again, and loading into PostgreSQL. It is scheduled monthly, every task retries twice, and data-quality failures stop the pipeline immediately." |
 | 0:45 | Press **Trigger** (in the dialog you can untick `run_format_benchmark` to save a minute) | "We'll start a fresh run now and come back to it at the end." |
 | 1:00 | **VS Code**: `data\raw`, `data\staging`, `data\curated\person_profile\region_code=13\` | "Raw files are never modified. Staging is cleaned, typed, de-duplicated Parquet. Curated is joined and analysis-ready; the person table is partitioned by region, so reading NCR touches 1 of 17 folders." |
 | 2:00 | **Airflow**: click the running `ingest_survey_files` or a finished `validate_staging` square → **Logs** | "Every step logs what it did: file checksums and row counts, and here each of the 117 checks with PASS. Row reconciliation proves no row was lost: raw rows equal staged rows plus removed duplicates." |

@@ -1,9 +1,19 @@
 # Data contract for the FLEMMS 2024 digital divide pipeline.
 #
-# This file is both documentation AND configuration: src/validation/checks.py
-# reads it and enforces every rule below on every run. A broken rule with
-# severity "error" (the default) fails the Airflow task and stops the pipeline;
-# severity "warning" is logged and reported but does not stop it.
+# This file is both documentation AND configuration: the pipeline reads it and
+# enforces every rule below on every run, at three gates:
+#   raw_files  -> src/validation/raw_gate.py, on the raw CSVs before staging
+#   tables     -> src/validation/checks.py, after staging and after curation
+# A broken rule with severity "error" (the default) fails the Airflow task and
+# stops the pipeline; severity "warning" is logged and reported but does not stop it.
+#
+# Raw file rules (column names exactly as in PSA's CSV header):
+#   min_rows             data rows the file must have
+#   required_columns     columns that must be in the header
+#   key_columns          never blank, always whole numbers
+#   weight               survey weight column: never blank or negative, and
+#                        positive on every row unless positive_when is given;
+#                        then positive exactly on the rows matching it, 0 elsewhere
 #
 # Column rules:
 #   type             integer | float | string | boolean
@@ -27,6 +37,32 @@ consumers:
   - Analysts / data scientists answering the digital divide research question
   - SQL users of the PostgreSQL warehouse (tables below with layer "curated")
 refresh: Monthly schedule; full reload of survey_year 2024 on each run (idempotent)
+
+# ===================== RAW GATE (checked before staging starts) =====================
+raw_files:
+  v1_household:
+    min_rows: 100000
+    required_columns: [HHID, REG, REG2, PRV, URBANITY, PSU, INTVW, RFACT]
+    key_columns: [HHID]
+    weight: {column: RFACT}
+  v1_household_questions:
+    min_rows: 100000
+    required_columns: [HHID, BENEFICIARY_4PS, ELECTRICITY, HH_SMARTPHONE, HH_BASICPHONE, HH_PC,
+                       HH_TABLET, HH_CABNET, HH_NOCABNET, HH_MOBSUB, ICT_EQUIP, HH_RFACT]
+    key_columns: [HHID]
+    weight: {column: HH_RFACT}
+  v1_member:
+    min_rows: 300000
+    required_columns: [HHID, LNO, SEX, AGE, HGC_LEVEL, ATTEND_SCHOOL, MEM_RFACT]
+    key_columns: [HHID, LNO]
+    weight: {column: MEM_RFACT}
+  v1_literacy:
+    min_rows: 300000
+    required_columns: [HHID, LNO_F2, RESULT_CODE_F2, AGE_F2, BLITERATE, FLITERATE, FLLEVEL, RESP_RFACT_F2]
+    key_columns: [HHID, LNO_F2]
+    # PSA gives a Form 2 weight only to completed interviews (result code 1); every
+    # other result code has weight 0 (572,475 of 610,590 rows have a weight in 2024).
+    weight: {column: RESP_RFACT_F2, positive_when: {RESULT_CODE_F2: 1}}
 
 tables:
   # ===================== STAGING (one table per source file) =====================

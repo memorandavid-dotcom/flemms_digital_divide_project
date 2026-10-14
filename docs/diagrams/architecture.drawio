@@ -55,7 +55,7 @@
         <mxCell id="sql" value="SQL queries" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
           <mxGeometry as="geometry" x="210" y="45" width="180" height="65" />
         </mxCell>
-        <mxCell id="rep" value="Reports: validation,&lt;br&gt;profiling, format benchmark" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
+        <mxCell id="rep" value="Reports and charts: validation,&lt;br&gt;estimates with 95% CIs, profiling" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="use">
           <mxGeometry as="geometry" x="420" y="45" width="200" height="65" />
         </mxCell>
         <mxCell id="e1" value="ingest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.75;exitY=1.0;exitDx=0;exitDy=0;entryX=0.219;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1" target="raw">
@@ -67,7 +67,7 @@
         <mxCell id="e3" value="fetch with retries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.948;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="raw">
           <mxGeometry as="geometry" relative="1" x="0" />
         </mxCell>
-        <mxCell id="e5" value="clean + de-duplicate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="raw" target="stg">
+        <mxCell id="e5" value="raw gate (validate) + clean + de-duplicate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="raw" target="stg">
           <mxGeometry as="geometry" relative="1" />
         </mxCell>
         <mxCell id="e6" value="validate (data contract) + join" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;" edge="1" parent="1" source="stg" target="cur">

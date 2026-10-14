@@ -181,7 +181,11 @@ def run_validation(stage: str, tables: dict[str, pd.DataFrame], batch_id: str,
         if spec is None:
             raise KeyError(f"Table '{name}' is not described in {CONTRACT_PATH.name}")
         results.extend(validate_table(df, name, spec, tables))
+    return report_results(stage, results, batch_id)
 
+
+def report_results(stage: str, results: list[CheckResult], batch_id: str) -> list[CheckResult]:
+    """Log every result, write the JSON report, and raise if an error-severity check failed."""
     failed = [r for r in results if not r.passed and r.severity == "error"]
     warned = [r for r in results if not r.passed and r.severity == "warning"]
     for r in results:
